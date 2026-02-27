@@ -19,20 +19,13 @@
 html{font-size:14px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;min-height:100vh}
 .app{max-width:860px;margin:0 auto;padding:20px 16px 40px}
-
-/* Phase indicator */
 .phase-bar{display:flex;gap:4px;margin-bottom:24px}
 .phase-dot{flex:1;height:3px;background:var(--border);border-radius:2px;transition:background .3s}
-.phase-dot.active{background:var(--cyan)}
-.phase-dot.done{background:var(--green)}
-
-/* Title area */
+.phase-dot.active{background:var(--cyan)}.phase-dot.done{background:var(--green)}
 .title-row{display:flex;align-items:center;gap:10px;margin-bottom:20px}
 .title-icon{width:28px;height:28px;border-radius:6px;background:var(--cyan-dim);border:1px solid rgba(0,170,255,.25);display:flex;align-items:center;justify-content:center}
 .title-icon svg{width:16px;height:16px;stroke:var(--cyan);fill:none;stroke-width:2}
 .title-text{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan)}
-
-/* Form elements */
 .form-section{margin-bottom:20px}
 .form-label{font-family:var(--mono);font-size:12px;color:var(--text2);margin-bottom:8px;letter-spacing:.5px}
 .checkbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
@@ -44,45 +37,32 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 .cb-item.checked .cb-box{border-color:var(--cyan);background:var(--cyan)}
 .cb-box svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2.5;opacity:0;transition:opacity .15s}
 .cb-item.checked .cb-box svg{opacity:1}
-
 .sel-wrap{position:relative}
 .sel-wrap select{width:100%;appearance:none;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 36px 10px 12px;color:var(--text);font-family:var(--sans);font-size:13px;cursor:pointer;outline:none;transition:border-color .15s}
 .sel-wrap select:focus{border-color:var(--cyan)}
 .sel-wrap::after{content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);border:4px solid transparent;border-top:5px solid var(--text3);pointer-events:none}
-
 .btn-start{display:block;width:100%;padding:12px;background:var(--cyan);color:#000;font-family:var(--mono);font-size:14px;font-weight:600;border:none;border-radius:6px;cursor:pointer;transition:opacity .15s;margin-top:8px}
 .btn-start:hover{opacity:.85}
 .btn-start:disabled{opacity:.4;cursor:not-allowed}
-
-/* Processing */
 .proc-wrap{text-align:center;padding:60px 0}
 .proc-bar-track{width:100%;max-width:400px;height:4px;background:var(--border);border-radius:2px;margin:20px auto;overflow:hidden}
 .proc-bar-fill{height:100%;width:0;background:var(--cyan);border-radius:2px;transition:width .3s}
 .proc-pct{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--cyan)}
 .proc-msg{font-size:13px;color:var(--text2);margin-top:12px;min-height:20px}
-
-/* Results */
 .tabs{display:flex;gap:2px;background:var(--bg2);border-radius:8px;padding:3px;margin-bottom:20px}
 .tab-btn{flex:1;padding:8px 12px;background:none;border:none;color:var(--text3);font-family:var(--mono);font-size:12px;cursor:pointer;border-radius:6px;transition:all .15s;white-space:nowrap}
 .tab-btn.active{background:var(--bg3);color:var(--cyan)}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Trend table */
+.tab-panel{display:none}.tab-panel.active{display:block}
 .trend-table{width:100%;border-collapse:collapse}
 .trend-table th{font-family:var(--mono);font-size:11px;color:var(--text3);text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);letter-spacing:.5px;white-space:nowrap}
 .trend-table td{padding:10px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
 .trend-table tr:last-child td{border-bottom:none}
-.conf-high{color:var(--green)}
-.conf-mid{color:var(--yellow)}
-.conf-low{color:var(--orange)}
+.conf-high{color:var(--green)}.conf-mid{color:var(--yellow)}.conf-low{color:var(--orange)}
 .rank-s{display:inline-block;padding:1px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:600;background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3)}
 .rank-a{display:inline-block;padding:1px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:600;background:rgba(234,179,8,.12);color:var(--yellow);border:1px solid rgba(234,179,8,.25)}
 .rank-b{display:inline-block;padding:1px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:600;background:rgba(148,163,184,.1);color:var(--text3);border:1px solid var(--border)}
 .sparkline{display:inline-block;vertical-align:middle}
 .comp-tag{font-size:11px;padding:2px 6px;border-radius:3px;background:var(--bg);border:1px solid var(--border)}
-
-/* Script cards */
 .script-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:10px;overflow:hidden}
 .script-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;transition:background .15s}
 .script-head:hover{background:var(--bg3)}
@@ -102,13 +82,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 .script-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 .meta-item{font-size:12px}
 .meta-key{color:var(--text3);font-family:var(--mono);font-size:11px}
-
-/* Data insights */
 .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
 .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px}
 .stat-val{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--cyan)}
 .stat-label{font-size:12px;color:var(--text3);margin-top:2px}
-
 .chart-section{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:14px}
 .chart-title{font-family:var(--mono);font-size:12px;color:var(--text2);margin-bottom:12px}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
@@ -116,503 +93,578 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 .bar-track{flex:1;height:18px;background:var(--bg);border-radius:3px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
 .bar-val{font-family:var(--mono);font-size:11px;color:var(--text3);width:35px;flex-shrink:0}
-
 .heatmap{display:grid;grid-template-columns:50px repeat(7,1fr);gap:3px;font-size:11px}
 .hm-label{display:flex;align-items:center;justify-content:flex-end;padding-right:6px;color:var(--text3);font-family:var(--mono)}
 .hm-day{text-align:center;color:var(--text3);font-family:var(--mono);padding:4px 0}
 .hm-cell{aspect-ratio:1;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--text)}
-.hm-0{background:var(--bg)}
-.hm-1{background:rgba(0,170,255,.1)}
-.hm-2{background:rgba(0,170,255,.25)}
-.hm-3{background:rgba(0,170,255,.45)}
-.hm-4{background:rgba(0,170,255,.7)}
-
-/* Bottom actions */
+.hm-0{background:var(--bg)}.hm-1{background:rgba(0,170,255,.1)}.hm-2{background:rgba(0,170,255,.25)}.hm-3{background:rgba(0,170,255,.45)}.hm-4{background:rgba(0,170,255,.7)}
 .bottom-actions{display:flex;gap:10px;margin-top:24px}
 .btn-done{flex:1;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;cursor:pointer;transition:all .15s}
 .btn-done:hover{border-color:var(--cyan);color:var(--cyan)}
 .btn-export{flex:1;padding:12px;background:var(--cyan);border:none;border-radius:6px;color:#000;font-family:var(--mono);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s}
 .btn-export:hover{opacity:.85}
-
-/* Responsive */
+.session-end{text-align:center;padding:40px 20px}
+.session-end-icon{width:48px;height:48px;border-radius:50%;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px}
+.session-end-icon svg{width:24px;height:24px;stroke:var(--green);fill:none;stroke-width:2}
+.session-end h3{font-size:18px;margin-bottom:8px}
+.session-end p{font-size:13px;color:var(--text3)}
 @media(max-width:600px){
-  .app{padding:12px 10px 32px}
-  .checkbox-grid{grid-template-columns:repeat(2,1fr)}
-  .stat-grid{grid-template-columns:1fr}
-  .trend-table{font-size:12px}
-  .trend-table th,.trend-table td{padding:6px}
-  .script-meta{grid-template-columns:1fr}
-  .heatmap{grid-template-columns:36px repeat(7,1fr);font-size:10px}
-  .bar-label{width:44px;font-size:11px}
+.app{padding:12px 10px 32px}
+.checkbox-grid{grid-template-columns:repeat(2,1fr)}
+.stat-grid{grid-template-columns:1fr}
+.trend-table{font-size:12px}
+.trend-table th,.trend-table td{padding:6px}
+.script-meta{grid-template-columns:1fr}
+.heatmap{grid-template-columns:36px repeat(7,1fr);font-size:10px}
+.bar-label{width:44px;font-size:11px}
 }
 </style>
 </head>
 <body>
 <div class="app" id="app">
-  <!-- Phase bar -->
-  <div class="phase-bar"><div class="phase-dot active" id="p1"></div><div class="phase-dot" id="p2"></div><div class="phase-dot" id="p3"></div></div>
-
-  <!-- Title -->
-  <div class="title-row">
-    <div class="title-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <span class="title-text">TrendPulse AI</span>
-  </div>
-
-  <!-- PHASE 1: Input -->
-  <div id="phase1">
-    <div class="form-section">
-      <div class="form-label">TARGET PLATFORMS</div>
-      <div class="checkbox-grid" id="platformGrid"></div>
-    </div>
-    <div class="form-section">
-      <div class="form-label">CONTENT VERTICAL</div>
-      <div class="sel-wrap">
-        <select id="selVertical">
-          <option value="food">美食</option><option value="beauty">美妆</option>
-          <option value="tech">科技</option><option value="life">生活</option>
-          <option value="comedy">搞笑</option><option value="knowledge">知识</option>
-          <option value="travel">旅行</option><option value="fitness">健身</option>
-          <option value="fashion">穿搭</option><option value="pets">宠物</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-section">
-      <div class="form-label">ACCOUNT TYPE</div>
-      <div class="sel-wrap">
-        <select id="selAccount">
-          <option value="creator">个人创作者</option><option value="brand">品牌官方号</option>
-          <option value="mcn">MCN机构</option><option value="ecom">电商带货</option>
-        </select>
-      </div>
-    </div>
-    <button class="btn-start" id="btnStart" onclick="window._app.start()">开始分析</button>
-  </div>
-
-  <!-- PHASE 2: Processing -->
-  <div id="phase2" style="display:none">
-    <div class="proc-wrap">
-      <div class="proc-pct" id="procPct">0%</div>
-      <div class="proc-bar-track"><div class="proc-bar-fill" id="procBar"></div></div>
-      <div class="proc-msg" id="procMsg"></div>
-    </div>
-  </div>
-
-  <!-- PHASE 3: Results -->
-  <div id="phase3" style="display:none">
-    <div class="tabs" id="tabBar">
-      <button class="tab-btn active" data-tab="trends">趋势预测</button>
-      <button class="tab-btn" data-tab="scripts">脚本方案</button>
-      <button class="tab-btn" data-tab="insights">数据洞察</button>
-    </div>
-    <div class="tab-panel active" id="tab-trends"></div>
-    <div class="tab-panel" id="tab-scripts"></div>
-    <div class="tab-panel" id="tab-insights"></div>
-    <div class="bottom-actions">
-      <button class="btn-done" onclick="window._app.finish()">完成</button>
-      <button class="btn-export" onclick="window._app.exportReport()">导出报告</button>
-    </div>
-  </div>
+<div class="phase-bar"><div class="phase-dot active" id="p1"></div><div class="phase-dot" id="p2"></div><div class="phase-dot" id="p3"></div></div>
+<div class="title-row">
+<div class="title-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+<span class="title-text">TrendPulse AI</span>
+</div>
+<div id="phase1">
+<div class="form-section">
+<div class="form-label">TARGET PLATFORMS</div>
+<div class="checkbox-grid" id="platformGrid"></div>
+</div>
+<div class="form-section">
+<div class="form-label">CONTENT VERTICAL</div>
+<div class="sel-wrap"><select id="selVertical">
+<option value="food">美食</option><option value="beauty">美妆</option><option value="tech">科技</option>
+<option value="life">生活</option><option value="comedy">搞笑</option><option value="knowledge">知识</option>
+<option value="travel">旅行</option><option value="fitness">健身</option>
+<option value="fashion">穿搭</option><option value="pets">宠物</option>
+</select></div>
+</div>
+<div class="form-section">
+<div class="form-label">ACCOUNT TYPE</div>
+<div class="sel-wrap"><select id="selAccount">
+<option value="creator">个人创作者</option><option value="brand">品牌官方号</option>
+<option value="mcn">MCN机构</option><option value="ecom">电商带货</option>
+</select></div>
+</div>
+<button class="btn-start" id="btnStart" onclick="window._app.start()">开始分析</button>
+</div>
+<div id="phase2" style="display:none">
+<div class="proc-wrap">
+<div class="proc-pct" id="procPct">0%</div>
+<div class="proc-bar-track"><div class="proc-bar-fill" id="procBar"></div></div>
+<div class="proc-msg" id="procMsg"></div>
+</div>
+</div>
+<div id="phase3" style="display:none">
+<div class="tabs" id="tabBar">
+<button class="tab-btn active" data-tab="trends">趋势预测</button>
+<button class="tab-btn" data-tab="scripts">脚本方案</button>
+<button class="tab-btn" data-tab="insights">数据洞察</button>
+</div>
+<div class="tab-panel active" id="tab-trends"></div>
+<div class="tab-panel" id="tab-scripts"></div>
+<div class="tab-panel" id="tab-insights"></div>
+<div class="bottom-actions">
+<button class="btn-export" onclick="window._app.exportReport()">导出爆款报告</button>
+<button class="btn-done" onclick="window._app.finish()">完成并结束</button>
+</div>
+</div>
+<div id="phase4" style="display:none"></div>
 </div>
 <script>
 (function(){'use strict';
 var timeouts=[];
 function addTimeout(fn,ms){var id=setTimeout(fn,ms);timeouts.push(id);return id;}
 function clearAllTimeouts(){for(var i=0;i<timeouts.length;i++)clearTimeout(timeouts[i]);timeouts=[];}
+var sessionUsed=false;
 
-/* ---- DATA BANKS ---- */
 var PLATFORMS=['抖音','快手','TikTok','YouTube','X/Twitter','小红书','B站','Instagram'];
 
 var TOPICS={
 food:[
-{name:'打工人5分钟早餐',conf:94,days:3,plat:'抖音/小红书',comp:'中',rank:'S'},
-{name:'一人食治愈系列',conf:91,days:4,plat:'B站/小红书',comp:'低',rank:'S'},
-{name:'便利店隐藏吃法',conf:87,days:5,plat:'抖音/快手',comp:'高',rank:'A'},
-{name:'减脂期欺骗餐',conf:83,days:6,plat:'小红书/抖音',comp:'中',rank:'A'},
-{name:'季节限定甜品',conf:78,days:7,plat:'小红书/Instagram',comp:'中',rank:'B'},
-{name:'深夜食堂复刻',conf:92,days:3,plat:'B站/抖音',comp:'低',rank:'S'},
-{name:'10元搞定一日三餐',conf:88,days:4,plat:'快手/抖音',comp:'高',rank:'A'},
-{name:'异国街头小吃',conf:76,days:8,plat:'YouTube/TikTok',comp:'低',rank:'B'},
-{name:'办公室偷偷美食',conf:85,days:5,plat:'抖音/小红书',comp:'中',rank:'A'},
-{name:'妈妈的味道复刻',conf:80,days:6,plat:'B站/快手',comp:'低',rank:'A'}
+{name:'打工人5分钟早餐',conf:94,days:3,plat:'抖音/小红书',comp:'中',rank:'S',tags:'#打工人早餐 #快手早餐 #上班族'},
+{name:'一人食治愈系列',conf:91,days:4,plat:'B站/小红书',comp:'低',rank:'S',tags:'#一人食 #独居日记 #治愈系'},
+{name:'便利店隐藏吃法',conf:87,days:5,plat:'抖音/快手',comp:'高',rank:'A',tags:'#便利店美食 #隐藏菜单 #省钱攻略'},
+{name:'减脂期欺骗餐',conf:83,days:6,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#减脂餐 #欺骗餐 #健康饮食'},
+{name:'季节限定甜品',conf:78,days:7,plat:'小红书/Instagram',comp:'中',rank:'B',tags:'#季节限定 #甜品控 #下午茶'},
+{name:'深夜食堂复刻',conf:92,days:3,plat:'B站/抖音',comp:'低',rank:'S',tags:'#深夜食堂 #宵夜 #居家美食'},
+{name:'10元搞定一日三餐',conf:88,days:4,plat:'快手/抖音',comp:'高',rank:'A',tags:'#省钱美食 #穷鬼套餐 #学生党'},
+{name:'异国街头小吃',conf:76,days:8,plat:'YouTube/TikTok',comp:'低',rank:'B',tags:'#街头美食 #异国风味 #探店'},
+{name:'办公室偷偷美食',conf:85,days:5,plat:'抖音/小红书',comp:'中',rank:'A',tags:'#办公室美食 #摸鱼神器 #打工人'},
+{name:'妈妈的味道复刻',conf:80,days:6,plat:'B站/快手',comp:'低',rank:'A',tags:'#家常菜 #妈妈的味道 #怀旧'}
 ],
 beauty:[
-{name:'通勤3分钟妆容',conf:93,days:3,plat:'小红书/抖音',comp:'高',rank:'S'},
-{name:'学生党平价好物',conf:90,days:4,plat:'小红书/B站',comp:'中',rank:'S'},
-{name:'换季护肤急救',conf:86,days:5,plat:'小红书/抖音',comp:'中',rank:'A'},
-{name:'素颜感伪妆',conf:82,days:6,plat:'抖音/TikTok',comp:'高',rank:'A'},
-{name:'成分党深度测评',conf:79,days:7,plat:'B站/小红书',comp:'低',rank:'B'},
-{name:'仿妆挑战系列',conf:91,days:3,plat:'抖音/TikTok',comp:'中',rank:'S'},
-{name:'美甲DIY教程',conf:84,days:5,plat:'小红书/Instagram',comp:'低',rank:'A'},
-{name:'发型改造计划',conf:77,days:8,plat:'抖音/快手',comp:'中',rank:'B'},
-{name:'男生护肤入门',conf:88,days:4,plat:'B站/小红书',comp:'低',rank:'A'},
-{name:'医美避坑指南',conf:81,days:6,plat:'小红书/抖音',comp:'高',rank:'A'}
+{name:'通勤3分钟妆容',conf:93,days:3,plat:'小红书/抖音',comp:'高',rank:'S',tags:'#通勤妆容 #快速化妆 #上班族'},
+{name:'学生党平价好物',conf:90,days:4,plat:'小红书/B站',comp:'中',rank:'S',tags:'#学生党 #平价好物 #百元搞定'},
+{name:'换季护肤急救',conf:86,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#换季护肤 #敏感肌 #护肤干货'},
+{name:'素颜感伪妆',conf:82,days:6,plat:'抖音/TikTok',comp:'高',rank:'A',tags:'#素颜妆 #伪素颜 #自然妆感'},
+{name:'成分党深度测评',conf:79,days:7,plat:'B站/小红书',comp:'低',rank:'B',tags:'#成分党 #护肤测评 #理性消费'},
+{name:'仿妆挑战系列',conf:91,days:3,plat:'抖音/TikTok',comp:'中',rank:'S',tags:'#仿妆 #挑战 #变装'},
+{name:'美甲DIY教程',conf:84,days:5,plat:'小红书/Instagram',comp:'低',rank:'A',tags:'#美甲教程 #DIY美甲 #手残党'},
+{name:'发型改造计划',conf:77,days:8,plat:'抖音/快手',comp:'中',rank:'B',tags:'#发型改造 #换头术 #颜值提升'},
+{name:'男生护肤入门',conf:88,days:4,plat:'B站/小红书',comp:'低',rank:'A',tags:'#男生护肤 #直男变帅 #入门级'},
+{name:'医美避坑指南',conf:81,days:6,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#医美避坑 #真实分享 #变美指南'}
 ],
 tech:[
-{name:'AI工具效率翻倍',conf:95,days:2,plat:'B站/YouTube',comp:'高',rank:'S'},
-{name:'千元机深度对比',conf:89,days:4,plat:'B站/抖音',comp:'高',rank:'S'},
-{name:'智能家居全屋方案',conf:85,days:5,plat:'B站/小红书',comp:'中',rank:'A'},
-{name:'编程零基础入门',conf:82,days:6,plat:'B站/YouTube',comp:'中',rank:'A'},
-{name:'数码产品隐藏功能',conf:78,days:7,plat:'抖音/B站',comp:'低',rank:'B'},
-{name:'远程办公神器',conf:90,days:3,plat:'小红书/B站',comp:'中',rank:'S'},
-{name:'电竞外设推荐',conf:83,days:5,plat:'B站/抖音',comp:'高',rank:'A'},
-{name:'手机摄影技巧',conf:87,days:4,plat:'抖音/小红书',comp:'中',rank:'A'},
-{name:'云服务避坑指南',conf:75,days:8,plat:'B站/YouTube',comp:'低',rank:'B'},
-{name:'开源项目推荐',conf:80,days:6,plat:'B站/YouTube',comp:'低',rank:'A'}
+{name:'AI工具效率翻倍',conf:95,days:2,plat:'B站/YouTube',comp:'高',rank:'S',tags:'#AI工具 #效率提升 #打工人必备'},
+{name:'千元机深度对比',conf:89,days:4,plat:'B站/抖音',comp:'高',rank:'S',tags:'#千元机 #手机测评 #性价比'},
+{name:'智能家居全屋方案',conf:85,days:5,plat:'B站/小红书',comp:'中',rank:'A',tags:'#智能家居 #全屋智能 #科技生活'},
+{name:'编程零基础入门',conf:82,days:6,plat:'B站/YouTube',comp:'中',rank:'A',tags:'#编程入门 #自学编程 #转行'},
+{name:'数码产品隐藏功能',conf:78,days:7,plat:'抖音/B站',comp:'低',rank:'B',tags:'#数码技巧 #隐藏功能 #你不知道的'},
+{name:'远程办公神器',conf:90,days:3,plat:'小红书/B站',comp:'中',rank:'S',tags:'#远程办公 #效率工具 #居家办公'},
+{name:'电竞外设推荐',conf:83,days:5,plat:'B站/抖音',comp:'高',rank:'A',tags:'#电竞外设 #游戏装备 #键盘推荐'},
+{name:'手机摄影技巧',conf:87,days:4,plat:'抖音/小红书',comp:'中',rank:'A',tags:'#手机摄影 #拍照技巧 #修图教程'},
+{name:'云服务避坑指南',conf:75,days:8,plat:'B站/YouTube',comp:'低',rank:'B',tags:'#云服务 #避坑 #程序员'},
+{name:'开源项目推荐',conf:80,days:6,plat:'B站/YouTube',comp:'低',rank:'A',tags:'#开源 #GitHub #程序员日常'}
+],
+life:[
+{name:'租房改造低成本',conf:93,days:3,plat:'小红书/抖音',comp:'中',rank:'S',tags:'#租房改造 #低成本装修 #出租屋'},
+{name:'极简断舍离指南',conf:88,days:4,plat:'小红书/B站',comp:'低',rank:'S',tags:'#断舍离 #极简生活 #整理收纳'},
+{name:'独居安全必备',conf:85,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#独居安全 #一个人住 #安全好物'},
+{name:'通勤好物合集',conf:82,days:6,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#通勤好物 #上班族 #通勤必备'},
+{name:'周末一日Vlog',conf:79,days:7,plat:'B站/小红书',comp:'低',rank:'B',tags:'#周末Vlog #日常记录 #生活碎片'},
+{name:'存钱挑战30天',conf:91,days:3,plat:'抖音/快手',comp:'中',rank:'S',tags:'#存钱挑战 #理财 #省钱技巧'},
+{name:'搬家打包攻略',conf:84,days:5,plat:'小红书/抖音',comp:'低',rank:'A',tags:'#搬家攻略 #打包技巧 #租房'},
+{name:'社恐自救指南',conf:86,days:4,plat:'B站/小红书',comp:'中',rank:'A',tags:'#社恐 #内向 #自我提升'},
+{name:'早起习惯养成',conf:77,days:8,plat:'小红书/抖音',comp:'低',rank:'B',tags:'#早起 #自律 #习惯养成'},
+{name:'平价家居好物',conf:83,days:5,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#家居好物 #平价 #提升幸福感'}
+],
+comedy:[
+{name:'社死现场合集',conf:95,days:2,plat:'抖音/快手',comp:'高',rank:'S',tags:'#社死现场 #尴尬瞬间 #搞笑日常'},
+{name:'方言挑战系列',conf:90,days:3,plat:'抖音/快手',comp:'中',rank:'S',tags:'#方言挑战 #各地方言 #笑死人'},
+{name:'职场吐槽剧场',conf:87,days:4,plat:'B站/抖音',comp:'中',rank:'A',tags:'#职场吐槽 #打工人 #老板VS员工'},
+{name:'情侣反差日常',conf:84,days:5,plat:'抖音/快手',comp:'高',rank:'A',tags:'#情侣日常 #反差萌 #恋爱搞笑'},
+{name:'宠物搞笑时刻',conf:81,days:6,plat:'抖音/快手',comp:'中',rank:'A',tags:'#宠物搞笑 #猫咪日常 #狗狗'},
+{name:'模仿秀翻车现场',conf:92,days:3,plat:'TikTok/抖音',comp:'低',rank:'S',tags:'#模仿秀 #翻车 #挑战失败'},
+{name:'AI配音恶搞',conf:86,days:4,plat:'B站/抖音',comp:'中',rank:'A',tags:'#AI配音 #恶搞 #二次创作'},
+{name:'00后整顿职场',conf:78,days:7,plat:'B站/抖音',comp:'高',rank:'B',tags:'#00后 #整顿职场 #新人'},
+{name:'反转剧情短剧',conf:89,days:3,plat:'抖音/快手',comp:'中',rank:'S',tags:'#反转 #短剧 #剧情向'},
+{name:'街头采访名场面',conf:76,days:8,plat:'抖音/YouTube',comp:'低',rank:'B',tags:'#街头采访 #名场面 #路人'}
+],
+knowledge:[
+{name:'一分钟冷知识',conf:94,days:2,plat:'抖音/B站',comp:'中',rank:'S',tags:'#冷知识 #涨知识 #你不知道的'},
+{name:'历史冷门故事',conf:89,days:4,plat:'B站/YouTube',comp:'低',rank:'S',tags:'#历史故事 #冷门知识 #科普'},
+{name:'心理学实用技巧',conf:86,days:5,plat:'小红书/B站',comp:'中',rank:'A',tags:'#心理学 #实用技巧 #人际关系'},
+{name:'经济学入门系列',conf:82,days:6,plat:'B站/YouTube',comp:'中',rank:'A',tags:'#经济学 #入门 #理财知识'},
+{name:'科学辟谣合集',conf:79,days:7,plat:'B站/抖音',comp:'低',rank:'B',tags:'#科学辟谣 #真相 #科普'},
+{name:'读书笔记精华',conf:90,days:3,plat:'小红书/B站',comp:'中',rank:'S',tags:'#读书笔记 #好书推荐 #知识分享'},
+{name:'职场沟通公式',conf:85,days:5,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#职场沟通 #表达能力 #向上管理'},
+{name:'法律常识必知',conf:83,days:5,plat:'B站/抖音',comp:'低',rank:'A',tags:'#法律常识 #维权 #实用知识'},
+{name:'思维导图教程',conf:77,days:8,plat:'B站/小红书',comp:'低',rank:'B',tags:'#思维导图 #学习方法 #效率'},
+{name:'世界未解之谜',conf:88,days:4,plat:'B站/YouTube',comp:'中',rank:'A',tags:'#未解之谜 #探秘 #好奇心'}
+],
+travel:[
+{name:'小众目的地安利',conf:93,days:3,plat:'小红书/抖音',comp:'中',rank:'S',tags:'#小众旅行 #冷门景点 #私藏'},
+{name:'穷游攻略系列',conf:89,days:4,plat:'小红书/B站',comp:'高',rank:'S',tags:'#穷游攻略 #省钱旅行 #学生党'},
+{name:'民宿踩雷实录',conf:86,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#民宿踩雷 #避坑 #真实测评'},
+{name:'城市Citywalk路线',conf:84,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#Citywalk #城市漫步 #拍照打卡'},
+{name:'高铁沿途风景',conf:80,days:7,plat:'抖音/快手',comp:'低',rank:'B',tags:'#高铁旅行 #沿途风景 #窗外'},
+{name:'一日游完美规划',conf:91,days:3,plat:'小红书/抖音',comp:'中',rank:'S',tags:'#一日游 #周末出行 #完美规划'},
+{name:'旅行拍照姿势',conf:87,days:4,plat:'小红书/TikTok',comp:'高',rank:'A',tags:'#旅行拍照 #拍照教程 #出片'},
+{name:'机票省钱秘籍',conf:82,days:6,plat:'小红书/抖音',comp:'低',rank:'A',tags:'#机票攻略 #省钱 #薅羊毛'},
+{name:'自驾游装备清单',conf:78,days:7,plat:'小红书/B站',comp:'低',rank:'B',tags:'#自驾游 #装备清单 #车载好物'},
+{name:'美食探店地图',conf:85,days:5,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#探店 #美食地图 #本地推荐'}
+],
+fitness:[
+{name:'帕梅拉平替课程',conf:92,days:3,plat:'B站/小红书',comp:'高',rank:'S',tags:'#帕梅拉 #居家健身 #跟练'},
+{name:'办公室5分钟拉伸',conf:90,days:3,plat:'小红书/抖音',comp:'中',rank:'S',tags:'#办公室拉伸 #久坐族 #肩颈放松'},
+{name:'新手增肌计划',conf:85,days:5,plat:'B站/抖音',comp:'中',rank:'A',tags:'#增肌计划 #新手健身 #蛋白质'},
+{name:'跑步入门指南',conf:82,days:6,plat:'小红书/B站',comp:'低',rank:'A',tags:'#跑步入门 #夜跑 #马拉松'},
+{name:'减脂餐食谱',conf:88,days:4,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#减脂餐 #健康食谱 #低卡'},
+{name:'瑜伽入门30天',conf:86,days:4,plat:'B站/小红书',comp:'中',rank:'A',tags:'#瑜伽 #入门 #柔韧性'},
+{name:'体态纠正训练',conf:84,days:5,plat:'小红书/B站',comp:'中',rank:'A',tags:'#体态纠正 #含胸驼背 #气质'},
+{name:'睡前助眠拉伸',conf:79,days:7,plat:'小红书/抖音',comp:'低',rank:'B',tags:'#助眠 #睡前拉伸 #放松'},
+{name:'居家哑铃训练',conf:81,days:6,plat:'B站/抖音',comp:'中',rank:'A',tags:'#哑铃训练 #居家健身 #力量'},
+{name:'马甲线速成',conf:91,days:3,plat:'抖音/小红书',comp:'高',rank:'S',tags:'#马甲线 #腹肌 #核心训练'}
+],
+fashion:[
+{name:'一衣多穿挑战',conf:93,days:3,plat:'小红书/抖音',comp:'中',rank:'S',tags:'#一衣多穿 #穿搭挑战 #省钱'},
+{name:'微胖女生显瘦穿搭',conf:90,days:3,plat:'小红书/抖音',comp:'高',rank:'S',tags:'#微胖穿搭 #显瘦 #大码'},
+{name:'通勤穿搭公式',conf:86,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#通勤穿搭 #上班族 #简约风'},
+{name:'季节转换叠穿',conf:83,days:6,plat:'小红书/Instagram',comp:'中',rank:'A',tags:'#叠穿 #换季穿搭 #层次感'},
+{name:'二手vintage淘货',conf:79,days:7,plat:'小红书/B站',comp:'低',rank:'B',tags:'#二手 #vintage #古着'},
+{name:'男生基础款搭配',conf:88,days:4,plat:'小红书/B站',comp:'低',rank:'A',tags:'#男生穿搭 #基础款 #直男改造'},
+{name:'配饰改变气质',conf:85,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#配饰 #气质提升 #饰品'},
+{name:'球鞋穿搭灵感',conf:82,days:6,plat:'小红书/抖音',comp:'高',rank:'A',tags:'#球鞋 #穿搭灵感 #运动风'},
+{name:'衣橱整理断舍离',conf:77,days:8,plat:'小红书/B站',comp:'低',rank:'B',tags:'#衣橱整理 #断舍离 #胶囊衣橱'},
+{name:'学院风回潮',conf:91,days:3,plat:'小红书/TikTok',comp:'中',rank:'S',tags:'#学院风 #复古 #校园穿搭'}
+],
+pets:[
+{name:'猫咪迷惑行为',conf:94,days:2,plat:'抖音/B站',comp:'中',rank:'S',tags:'#猫咪日常 #迷惑行为 #铲屎官'},
+{name:'新手养猫指南',conf:89,days:4,plat:'小红书/B站',comp:'中',rank:'S',tags:'#新手养猫 #猫咪用品 #养宠攻略'},
+{name:'遛狗好物推荐',conf:85,days:5,plat:'小红书/抖音',comp:'中',rank:'A',tags:'#遛狗好物 #狗狗 #宠物用品'},
+{name:'宠物辅食制作',conf:83,days:6,plat:'小红书/B站',comp:'低',rank:'A',tags:'#宠物辅食 #自制猫饭 #宠物营养'},
+{name:'异宠饲养日记',conf:78,days:7,plat:'B站/抖音',comp:'低',rank:'B',tags:'#异宠 #仓鼠 #爬宠'},
+{name:'猫狗大战名场面',conf:92,days:3,plat:'抖音/快手',comp:'高',rank:'S',tags:'#猫狗大战 #搞笑宠物 #日常'},
+{name:'宠物变装秀',conf:86,days:4,plat:'抖音/TikTok',comp:'中',rank:'A',tags:'#宠物变装 #萌宠 #换装'},
+{name:'流浪动物救助',conf:81,days:6,plat:'B站/抖音',comp:'低',rank:'A',tags:'#流浪动物 #救助 #领养代替购买'},
+{name:'宠物医院避坑',conf:84,days:5,plat:'小红书/B站',comp:'中',rank:'A',tags:'#宠物医院 #避坑 #宠物健康'},
+{name:'多宠家庭生活',conf:76,days:8,plat:'B站/快手',comp:'低',rank:'B',tags:'#多宠家庭 #宠物日常 #热闹'}
 ]
 };
-// Fallback
-var DEFAULT_TOPICS=[
-{name:'热门话题 #1',conf:92,days:3,plat:'多平台',comp:'中',rank:'S'},
-{name:'热门话题 #2',conf:88,days:4,plat:'多平台',comp:'中',rank:'S'},
-{name:'热门话题 #3',conf:85,days:5,plat:'多平台',comp:'高',rank:'A'},
-{name:'热门话题 #4',conf:82,days:6,plat:'多平台',comp:'低',rank:'A'},
-{name:'热门话题 #5',conf:79,days:7,plat:'多平台',comp:'中',rank:'B'},
-{name:'热门话题 #6',conf:90,days:3,plat:'多平台',comp:'低',rank:'S'},
-{name:'热门话题 #7',conf:84,days:5,plat:'多平台',comp:'中',rank:'A'},
-{name:'热门话题 #8',conf:76,days:8,plat:'多平台',comp:'低',rank:'B'},
-{name:'热门话题 #9',conf:86,days:4,plat:'多平台',comp:'高',rank:'A'},
-{name:'热门话题 #10',conf:81,days:6,plat:'多平台',comp:'中',rank:'A'}
-];
 
 var SCRIPTS={
 food:[
-{title:'打工人5分钟早餐',dur:'15s',bgm:'轻快日系/治愈系BGM',postTime:'工作日 7:00-8:30',scenes:[
-{time:'0-3s',label:'开场钩子',desc:'\"5分钟搞定一周早餐？打工人狠狠心动了\"'},
-{time:'3-8s',label:'食材展示',desc:'快速展示5种食材，卡点切换'},
-{time:'8-13s',label:'制作过程',desc:'加速拍摄+特写，治愈感BGM'},
-{time:'13-15s',label:'成品展示',desc:'摆盘特写+文字引导\"关注看更多\"'}
+{title:'打工人5分钟早餐',dur:'15s',bgm:'轻快日系/治愈系BGM',postTime:'工作日 7:00-8:30',
+caption:'5分钟搞定一周早餐！打工人再也不用饿肚子上班了，简单到离谱，好吃到流泪～跟着做，明天就试！',
+hashtags:'#打工人早餐 #快手早餐 #上班族 #早餐食谱 #5分钟早餐',
+scenes:[
+{time:'0-3s',label:'开场钩子',desc:'"5分钟搞定一周早餐？打工人狠狠心动了"，配合闹钟响+起床画面'},
+{time:'3-8s',label:'食材展示',desc:'快速展示5种食材（鸡蛋/吐司/牛奶/生菜/芝士），卡点切换，每个0.8s'},
+{time:'8-13s',label:'制作过程',desc:'2x加速拍摄制作过程+食材特写，治愈感BGM卡点'},
+{time:'13-15s',label:'成品展示',desc:'摆盘特写+蒸汽升腾+文字"关注看更多早餐灵感"'}
 ]},
-{title:'一人食治愈系列',dur:'60s',bgm:'钢琴轻音乐/ASMR',postTime:'晚间 19:00-21:00',scenes:[
-{time:'0-5s',label:'氛围营造',desc:'暖色灯光+安静厨房，字幕：\"今天只为自己做一顿饭\"'},
-{time:'5-25s',label:'备菜过程',desc:'慢节奏切菜、洗菜ASMR，近景特写'},
-{time:'25-45s',label:'烹饪过程',desc:'翻炒声、沸腾声，蒸汽特写，中景与特写切换'},
-{time:'45-60s',label:'享用时刻',desc:'一人餐桌，安静享用，结尾字幕引导互动'}
+{title:'一人食治愈系列',dur:'60s',bgm:'钢琴轻音乐/ASMR环境音',postTime:'晚间 19:00-21:00',
+caption:'今天只为自己做一顿饭。一个人也要好好吃饭，生活需要仪式感。安静的厨房，热气腾腾的一人餐，治愈了一整天的疲惫。',
+hashtags:'#一人食 #独居日记 #治愈系 #居家做饭 #生活仪式感',
+scenes:[
+{time:'0-5s',label:'氛围营造',desc:'暖色灯光+安静厨房全景，字幕淡入："今天只为自己做一顿饭"'},
+{time:'5-25s',label:'备菜过程',desc:'慢节奏切菜、洗菜ASMR音效，近景微距特写，自然光'},
+{time:'25-45s',label:'烹饪过程',desc:'翻炒声+沸腾声+蒸汽特写，中景与特写交替切换'},
+{time:'45-60s',label:'享用时刻',desc:'一人餐桌安静享用，筷子夹菜特写，结尾字幕"你今天吃了什么？"引导互动'}
 ]},
-{title:'便利店隐藏吃法',dur:'30s',bgm:'节奏感电子/卡点音乐',postTime:'午间 11:30-13:00',scenes:[
-{time:'0-3s',label:'悬念开场',desc:'\"便利店员工才知道的隐藏吃法👀\"'},
-{time:'3-12s',label:'食材采购',desc:'便利店内拍摄，随手拿取3-4种商品'},
-{time:'12-25s',label:'创意组合',desc:'展示DIY过程，卡点切换，加速+正常速度交替'},
-{time:'25-30s',label:'试吃反应',desc:'真实反应+评分，引导评论\"你试过哪种？\"'}
+{title:'便利店隐藏吃法',dur:'30s',bgm:'节奏感电子/卡点音乐',postTime:'午间 11:30-13:00',
+caption:'便利店员工才知道的隐藏吃法！花10块钱吃出50块的效果，学会了再也不想点外卖了！',
+hashtags:'#便利店美食 #隐藏菜单 #省钱攻略 #便利店 #创意吃法',
+scenes:[
+{time:'0-3s',label:'悬念开场',desc:'"便利店员工才知道的隐藏吃法👀"，门店入口画面'},
+{time:'3-12s',label:'食材采购',desc:'便利店内拍摄，随手拿取3-4种商品，展示价签，合计金额'},
+{time:'12-25s',label:'创意组合',desc:'展示DIY过程，卡点切换，加速+正常速度交替，配合"叮"音效'},
+{time:'25-30s',label:'试吃反应',desc:'真实试吃反应+打分(★★★★☆)，引导评论"你试过哪种组合？"'}
 ]}
 ],
 beauty:[
-{title:'通勤3分钟妆容',dur:'30s',bgm:'轻快流行/早安系BGM',postTime:'工作日 6:30-8:00',scenes:[
-{time:'0-3s',label:'对比开场',desc:'素颜 vs 完妆 快速闪切，\"3分钟出门不迟到\"'},
-{time:'3-15s',label:'底妆+遮瑕',desc:'极简步骤，一个产品搞定，计时器倒计时'},
-{time:'15-25s',label:'眼妆+唇妆',desc:'2步完成，强调速度和效果对比'},
-{time:'25-30s',label:'完成展示',desc:'出门场景+产品清单，引导收藏'}
+{title:'通勤3分钟妆容',dur:'30s',bgm:'轻快流行/早安系BGM',postTime:'工作日 6:30-8:00',
+caption:'3分钟出门妆！迟到星人的救星来了，只用4个产品搞定全脸，素颜到精致就这么简单～',
+hashtags:'#通勤妆容 #快速化妆 #上班族 #3分钟妆容 #懒人化妆',
+scenes:[
+{time:'0-3s',label:'对比开场',desc:'左右分屏：素颜 vs 完妆，配文"3分钟出门不迟到"'},
+{time:'3-15s',label:'底妆+遮瑕',desc:'极简步骤演示，一个气垫搞定，右上角倒计时'},
+{time:'15-25s',label:'眼妆+唇妆',desc:'2步完成：一抹眼影+一涂口红，强调速度感'},
+{time:'25-30s',label:'完成展示',desc:'出门场景+产品清单浮窗，引导"收藏这条随时用"'}
 ]},
-{title:'学生党平价好物',dur:'60s',bgm:'清新吉他/校园感BGM',postTime:'周末 10:00-12:00',scenes:[
-{time:'0-5s',label:'价格冲击',desc:'\"全套不超过100块？！\"，堆叠产品展示'},
-{time:'5-30s',label:'逐个测评',desc:'每个产品10秒内快速上脸试色，标注价格'},
-{time:'30-50s',label:'妆容教程',desc:'用推荐产品完成一个完整妆容'},
-{time:'50-60s',label:'效果总结',desc:'持妆效果展示+购买链接引导'}
+{title:'学生党平价好物',dur:'60s',bgm:'清新吉他/校园感BGM',postTime:'周末 10:00-12:00',
+caption:'全套不超过100块！学生党看过来，这些平价好物真的不输大牌，每一个都是我的心头好！',
+hashtags:'#学生党 #平价好物 #百元搞定 #好物推荐 #性价比',
+scenes:[
+{time:'0-5s',label:'价格冲击',desc:'"全套不超过100块？！"，堆叠产品展示+价格标签'},
+{time:'5-30s',label:'逐个测评',desc:'每个产品8-10秒快速上脸试色/试用，标注单价'},
+{time:'30-50s',label:'妆容教程',desc:'用全部推荐产品完成一个完整妆容，步骤清晰'},
+{time:'50-60s',label:'效果总结',desc:'8小时持妆效果展示+产品清单，引导收藏/分享'}
 ]},
-{title:'仿妆挑战系列',dur:'60s',bgm:'电影感BGM/原角色主题曲',postTime:'周末 18:00-20:00',scenes:[
-{time:'0-5s',label:'原图对比',desc:'展示仿妆对象原图，\"今天挑战XX仿妆\"'},
-{time:'5-35s',label:'妆容过程',desc:'关键步骤详解，强调技巧难点'},
-{time:'35-50s',label:'造型完善',desc:'配饰+发型+服装，逐步还原'},
-{time:'50-60s',label:'终极对比',desc:'左右分屏对比，投票引导\"像不像？\"'}
+{title:'仿妆挑战系列',dur:'60s',bgm:'电影感BGM/角色主题曲',postTime:'周末 18:00-20:00',
+caption:'今天挑战XX仿妆！从素颜到cos完成，你觉得像吗？评论区打分！',
+hashtags:'#仿妆 #挑战 #变装 #化妆教程 #COS',
+scenes:[
+{time:'0-5s',label:'原图对比',desc:'展示仿妆对象原图，配文"今天挑战XX仿妆"'},
+{time:'5-35s',label:'妆容过程',desc:'关键步骤详解（眉形/眼妆/唇色），强调技巧难点'},
+{time:'35-50s',label:'造型完善',desc:'配饰+发型+服装逐步还原，BGM渐强'},
+{time:'50-60s',label:'终极对比',desc:'左右分屏同角度对比，弹出投票引导"像不像？1-10分"'}
 ]}
 ],
 tech:[
-{title:'AI工具效率翻倍',dur:'60s',bgm:'科技感电子/未来感BGM',postTime:'工作日 12:00-13:00',scenes:[
-{time:'0-5s',label:'痛点引入',desc:'\"还在加班？这些AI工具让你准时下班\"'},
-{time:'5-25s',label:'工具演示1',desc:'第一个工具实操演示，before/after效果'},
-{time:'25-45s',label:'工具演示2',desc:'第二个工具操作，强调效率提升数据'},
-{time:'45-60s',label:'总结清单',desc:'工具合集+使用场景表格，引导关注获取更多'}
+{title:'AI工具效率翻倍',dur:'60s',bgm:'科技感电子/未来感BGM',postTime:'工作日 12:00-13:00',
+caption:'还在加班？这3个AI工具让你准时下班！亲测效率提升200%，打工人必须收藏这条！',
+hashtags:'#AI工具 #效率提升 #打工人必备 #准时下班 #办公神器',
+scenes:[
+{time:'0-5s',label:'痛点引入',desc:'"还在加班到深夜？"配合疲惫打工人画面+反转'},
+{time:'5-25s',label:'工具演示1',desc:'第一个工具实操录屏，左右分屏before/after'},
+{time:'25-45s',label:'工具演示2',desc:'第二个工具操作演示，数据对比+效率提升百分比'},
+{time:'45-60s',label:'总结清单',desc:'工具合集清单+使用场景表格，引导"关注获取完整工具包"'}
 ]},
-{title:'千元机深度对比',dur:'60s',bgm:'节奏感说唱/数码博主常用',postTime:'周末 14:00-16:00',scenes:[
-{time:'0-5s',label:'悬念开场',desc:'\"1000块到底能买到多好的手机？\"'},
-{time:'5-30s',label:'外观对比',desc:'3台手机并排，设计/手感/屏幕逐项对比'},
-{time:'30-50s',label:'性能测试',desc:'跑分+游戏实测+拍照对比，数据可视化'},
-{time:'50-60s',label:'最终推荐',desc:'评分雷达图+适合人群分析，引导投票'}
+{title:'千元机深度对比',dur:'60s',bgm:'节奏感说唱/数码常用BGM',postTime:'周末 14:00-16:00',
+caption:'1000块到底能买到多好的手机？3台千元机全方位对比，结果出乎意料！你选哪台？',
+hashtags:'#千元机 #手机测评 #性价比 #数码推荐 #手机对比',
+scenes:[
+{time:'0-5s',label:'悬念开场',desc:'"1000块到底能买到多好的手机？"3台手机入镜'},
+{time:'5-30s',label:'外观对比',desc:'3台手机并排，设计/手感/屏幕逐项对比，打分表'},
+{time:'30-50s',label:'性能测试',desc:'跑分+王者荣耀实测+拍照对比，数据可视化呈现'},
+{time:'50-60s',label:'最终推荐',desc:'雷达图总评+适合人群分析，引导投票"你选哪台？"'}
 ]},
-{title:'远程办公神器',dur:'30s',bgm:'Lo-fi/咖啡馆氛围',postTime:'周一 9:00-10:00',scenes:[
-{time:'0-3s',label:'场景共鸣',desc:'居家办公混乱桌面 → 整理后的高效桌面'},
-{time:'3-15s',label:'软件推荐',desc:'3个核心工具快速演示，各5秒'},
-{time:'15-25s',label:'效率对比',desc:'使用前vs使用后的工作流对比'},
-{time:'25-30s',label:'总结行动',desc:'一句话总结+引导评论分享自己的神器'}
+{title:'远程办公神器',dur:'30s',bgm:'Lo-fi/咖啡馆氛围BGM',postTime:'周一 9:00-10:00',
+caption:'居家办公效率低？这3个神器让你在家也能高效工作，第2个真的改变了我的工作方式！',
+hashtags:'#远程办公 #效率工具 #居家办公 #办公神器 #在家工作',
+scenes:[
+{time:'0-3s',label:'场景共鸣',desc:'混乱桌面快切到整洁桌面，"3个神器改变了一切"'},
+{time:'3-15s',label:'软件推荐',desc:'3个核心工具快速演示，每个4秒，录屏+真人穿插'},
+{time:'15-25s',label:'效率对比',desc:'使用前vs使用后的工作流对比，数据标注'},
+{time:'25-30s',label:'总结行动',desc:'一句话总结+引导"评论区分享你的办公神器"'}
 ]}
 ]
 };
-var DEFAULT_SCRIPTS=[
-{title:'热门话题脚本 #1',dur:'15s',bgm:'流行BGM',postTime:'黄金时段',scenes:[
-{time:'0-3s',label:'开场',desc:'悬念/痛点切入'},
-{time:'3-10s',label:'主体内容',desc:'核心价值展示'},
-{time:'10-15s',label:'收尾引导',desc:'互动引导+关注提示'}
-]},
-{title:'热门话题脚本 #2',dur:'30s',bgm:'节奏感BGM',postTime:'午间/晚间',scenes:[
-{time:'0-5s',label:'钩子',desc:'1句话抓住注意力'},
-{time:'5-20s',label:'内容展开',desc:'分步骤展示，卡点切换'},
-{time:'20-30s',label:'总结互动',desc:'效果对比+引导评论'}
-]},
-{title:'热门话题脚本 #3',dur:'60s',bgm:'氛围感BGM',postTime:'周末黄金时段',scenes:[
-{time:'0-5s',label:'引入',desc:'共鸣型问题开场'},
-{time:'5-30s',label:'过程展示',desc:'详细步骤，多角度拍摄'},
-{time:'30-50s',label:'深度讲解',desc:'技巧要点+常见误区'},
-{time:'50-60s',label:'总结行动',desc:'清单总结+收藏引导'}
-]}
-];
 
-/* ---- SPARKLINE SVG ---- */
+var VERT_NAMES={food:'美食',beauty:'美妆',tech:'科技',life:'生活',comedy:'搞笑',knowledge:'知识',travel:'旅行',fitness:'健身',fashion:'穿搭',pets:'宠物'};
+
+function getTopics(key){return TOPICS[key]||TOPICS.food;}
+function getScripts(key){return SCRIPTS[key]||SCRIPTS.food;}
+
 function makeSpark(conf){
-  var pts=[];var h=18;var w=50;var n=8;
-  // generate a growth curve based on confidence
-  var base=conf/100;
-  for(var i=0;i<n;i++){
-    var t=i/(n-1);
-    var v=base*t*t+Math.sin(t*3.14)*0.15*(1-base)+0.05;
-    if(v>1)v=1;if(v<0)v=0;
-    pts.push(Math.round(i*(w/(n-1)))+','+Math.round(h-v*h));
-  }
-  var color=conf>=85?'%2322c55e':conf>=70?'%23eab308':'%23f97316';
-  return '<svg class="sparkline" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'"><polyline points="'+pts.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-linecap="round"/></svg>';
+var pts=[];var h=18;var w=50;var n=8;var base=conf/100;
+for(var i=0;i<n;i++){var t=i/(n-1);var v=base*t*t+Math.sin(t*3.14)*0.15*(1-base)+0.05;if(v>1)v=1;if(v<0)v=0;pts.push(Math.round(i*(w/(n-1)))+','+Math.round(h-v*h));}
+var color=conf>=85?'%2322c55e':conf>=70?'%23eab308':'%23f97316';
+return '<svg class="sparkline" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'"><polyline points="'+pts.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-linecap="round"/></svg>';
 }
 
-/* ---- HEATMAP DATA ---- */
-var HEATMAP=[
-  [3,2,4,3,4,2,1],
-  [2,3,3,4,3,3,2],
-  [1,1,2,2,2,4,4],
-  [4,3,2,1,1,3,3]
-];
+var HEATMAP=[[3,2,4,3,4,2,1],[2,3,3,4,3,3,2],[1,1,2,2,2,4,4],[4,3,2,1,1,3,3]];
 var HM_ROWS=['早间','午间','晚间','深夜'];
 var HM_COLS=['周一','周二','周三','周四','周五','周六','周日'];
 
-/* ---- APP LOGIC ---- */
 var selectedPlatforms={};
 var currentData=null;
 
 function initPlatforms(){
-  var grid=document.getElementById('platformGrid');
-  var html='';
-  for(var i=0;i<PLATFORMS.length;i++){
-    html+='<label class="cb-item" data-plat="'+PLATFORMS[i]+'"><input type="checkbox"><span class="cb-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>'+PLATFORMS[i]+'</label>';
-  }
-  grid.innerHTML=html;
-  grid.addEventListener('click',function(e){
-    var item=e.target.closest('.cb-item');
-    if(!item)return;
-    var inp=item.querySelector('input');
-    inp.checked=!inp.checked;
-    if(inp.checked){item.classList.add('checked');selectedPlatforms[item.getAttribute('data-plat')]=true;}
-    else{item.classList.remove('checked');delete selectedPlatforms[item.getAttribute('data-plat')];}
-    updateStartBtn();
-  });
+var grid=document.getElementById('platformGrid');var html='';
+for(var i=0;i<PLATFORMS.length;i++){
+html+='<label class="cb-item" data-plat="'+PLATFORMS[i]+'"><input type="checkbox"><span class="cb-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>'+PLATFORMS[i]+'</label>';
+}
+grid.innerHTML=html;
+grid.addEventListener('click',function(e){
+var item=e.target.closest('.cb-item');if(!item)return;
+var inp=item.querySelector('input');inp.checked=!inp.checked;
+if(inp.checked){item.classList.add('checked');selectedPlatforms[item.getAttribute('data-plat')]=true;}
+else{item.classList.remove('checked');delete selectedPlatforms[item.getAttribute('data-plat')];}
+updateStartBtn();
+});
 }
 
 function updateStartBtn(){
-  var btn=document.getElementById('btnStart');
-  var count=Object.keys(selectedPlatforms).length;
-  btn.disabled=count===0;
+document.getElementById('btnStart').disabled=Object.keys(selectedPlatforms).length===0;
 }
 
 function startAnalysis(){
-  var vertical=document.getElementById('selVertical').value;
-  // Prepare data
-  var topicKey=vertical==='food'?'food':vertical==='beauty'?'beauty':vertical==='tech'?'tech':null;
-  currentData={
-    topics:topicKey&&TOPICS[topicKey]?TOPICS[topicKey]:DEFAULT_TOPICS,
-    scripts:topicKey&&SCRIPTS[topicKey]?SCRIPTS[topicKey]:DEFAULT_SCRIPTS,
-    vertical:document.getElementById('selVertical').options[document.getElementById('selVertical').selectedIndex].text,
-    platforms:Object.keys(selectedPlatforms),
-    account:document.getElementById('selAccount').options[document.getElementById('selAccount').selectedIndex].text
-  };
-
-  // Switch to phase 2
-  document.getElementById('phase1').style.display='none';
-  document.getElementById('phase2').style.display='block';
-  document.getElementById('p1').className='phase-dot done';
-  document.getElementById('p2').className='phase-dot active';
-
-  runProcessing();
+if(sessionUsed)return;
+sessionUsed=true;
+var vertical=document.getElementById('selVertical').value;
+currentData={
+topics:getTopics(vertical),
+scripts:getScripts(vertical),
+vertical:VERT_NAMES[vertical]||vertical,
+verticalKey:vertical,
+platforms:Object.keys(selectedPlatforms),
+account:document.getElementById('selAccount').options[document.getElementById('selAccount').selectedIndex].text,
+timestamp:new Date().toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+};
+document.getElementById('phase1').style.display='none';
+document.getElementById('phase2').style.display='block';
+document.getElementById('p1').className='phase-dot done';
+document.getElementById('p2').className='phase-dot active';
+runProcessing();
 }
 
 function runProcessing(){
-  var msgs=['正在采集多平台数据...','分析趋势热度...','生成爆款选题...','优化脚本方案...','生成报告...'];
-  var pct=0;var step=0;var total=100;
-  var barEl=document.getElementById('procBar');
-  var pctEl=document.getElementById('procPct');
-  var msgEl=document.getElementById('procMsg');
-
-  function tick(){
-    if(pct>=total){
-      showResults();
-      return;
-    }
-    var inc=Math.floor(Math.random()*8)+3;
-    pct=Math.min(pct+inc,total);
-    barEl.style.width=pct+'%';
-    pctEl.textContent=pct+'%';
-    var msgIdx=Math.min(Math.floor(pct/20),msgs.length-1);
-    if(msgIdx!==step){step=msgIdx;msgEl.textContent=msgs[step];}
-    addTimeout(tick,Math.floor(Math.random()*200)+100);
-  }
-  msgEl.textContent=msgs[0];
-  addTimeout(tick,300);
+var msgs=['正在采集多平台数据...','分析趋势热度...','生成爆款选题...','优化脚本方案...','生成完整报告...'];
+var pct=0;var step=0;
+var barEl=document.getElementById('procBar');var pctEl=document.getElementById('procPct');var msgEl=document.getElementById('procMsg');
+function tick(){
+if(pct>=100){showResults();return;}
+var inc=Math.floor(Math.random()*8)+3;pct=Math.min(pct+inc,100);
+barEl.style.width=pct+'%';pctEl.textContent=pct+'%';
+var msgIdx=Math.min(Math.floor(pct/20),msgs.length-1);
+if(msgIdx!==step){step=msgIdx;msgEl.textContent=msgs[step];}
+addTimeout(tick,Math.floor(Math.random()*200)+100);
+}
+msgEl.textContent=msgs[0];addTimeout(tick,300);
 }
 
 function showResults(){
-  document.getElementById('phase2').style.display='none';
-  document.getElementById('phase3').style.display='block';
-  document.getElementById('p2').className='phase-dot done';
-  document.getElementById('p3').className='phase-dot active';
-
-  renderTrends();
-  renderScripts();
-  renderInsights();
+document.getElementById('phase2').style.display='none';
+document.getElementById('phase3').style.display='block';
+document.getElementById('p2').className='phase-dot done';
+document.getElementById('p3').className='phase-dot active';
+renderTrends();renderScripts();renderInsights();
 }
 
 function renderTrends(){
-  var d=currentData.topics;
-  var html='<table class="trend-table"><thead><tr><th>话题</th><th>置信度</th><th>趋势</th><th>爆发</th><th>平台</th><th>竞争</th><th>等级</th></tr></thead><tbody>';
-  for(var i=0;i<d.length;i++){
-    var t=d[i];
-    var confClass=t.conf>=85?'conf-high':t.conf>=70?'conf-mid':'conf-low';
-    var rankClass=t.rank==='S'?'rank-s':t.rank==='A'?'rank-a':'rank-b';
-    html+='<tr><td>'+t.name+'</td><td class="'+confClass+'" style="font-family:var(--mono)">'+t.conf+'%</td><td>'+makeSpark(t.conf)+'</td><td style="font-family:var(--mono);color:var(--text3)">'+t.days+'天后</td><td><span class="comp-tag">'+t.plat+'</span></td><td>'+t.comp+'</td><td><span class="'+rankClass+'">'+t.rank+'</span></td></tr>';
-  }
-  html+='</tbody></table>';
-  document.getElementById('tab-trends').innerHTML=html;
+var d=currentData.topics;
+var html='<table class="trend-table"><thead><tr><th>#</th><th>话题</th><th>置信度</th><th>趋势</th><th>爆发</th><th>平台</th><th>竞争</th><th>等级</th></tr></thead><tbody>';
+for(var i=0;i<d.length;i++){
+var t=d[i];var confClass=t.conf>=85?'conf-high':t.conf>=70?'conf-mid':'conf-low';
+var rankClass=t.rank==='S'?'rank-s':t.rank==='A'?'rank-a':'rank-b';
+html+='<tr><td style="font-family:var(--mono);color:var(--text3)">'+(i+1)+'</td><td><strong>'+t.name+'</strong><div style="font-size:11px;color:var(--text3);margin-top:2px">'+t.tags+'</div></td><td class="'+confClass+'" style="font-family:var(--mono)">'+t.conf+'%</td><td>'+makeSpark(t.conf)+'</td><td style="font-family:var(--mono);color:var(--text3)">'+t.days+'天后</td><td><span class="comp-tag">'+t.plat+'</span></td><td>'+t.comp+'</td><td><span class="'+rankClass+'">'+t.rank+'</span></td></tr>';
+}
+html+='</tbody></table>';
+document.getElementById('tab-trends').innerHTML=html;
 }
 
 function renderScripts(){
-  var d=currentData.scripts;
-  var html='';
-  for(var i=0;i<d.length;i++){
-    var s=d[i];
-    html+='<div class="script-card"><div class="script-head" data-idx="'+i+'"><div class="script-head-left"><span class="script-num">'+(i+1)+'</span><span class="script-title">'+s.title+'</span></div><div style="display:flex;align-items:center;gap:8px"><span class="script-dur">'+s.dur+'</span><span class="script-toggle" id="stog'+i+'"><svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></div></div>';
-    html+='<div class="script-body" id="sbody'+i+'">';
-    for(var j=0;j<s.scenes.length;j++){
-      var sc=s.scenes[j];
-      html+='<div class="scene-item"><div class="scene-time">'+sc.time+'</div><div class="scene-label">'+sc.label+'</div><div class="scene-desc">'+sc.desc+'</div></div>';
-    }
-    html+='<div class="script-meta"><div class="meta-item"><div class="meta-key">BGM建议</div>'+s.bgm+'</div><div class="meta-item"><div class="meta-key">发布时间</div>'+s.postTime+'</div></div>';
-    html+='</div></div>';
-  }
-  var panel=document.getElementById('tab-scripts');
-  panel.innerHTML=html;
-  // event delegation for expand/collapse
-  panel.addEventListener('click',function(e){
-    var head=e.target.closest('.script-head');
-    if(!head)return;
-    var idx=head.getAttribute('data-idx');
-    var body=document.getElementById('sbody'+idx);
-    var tog=document.getElementById('stog'+idx);
-    if(body.classList.contains('open')){body.classList.remove('open');tog.classList.remove('open');}
-    else{body.classList.add('open');tog.classList.add('open');}
-  });
+var d=currentData.scripts;var html='';
+for(var i=0;i<d.length;i++){
+var s=d[i];
+html+='<div class="script-card"><div class="script-head" data-idx="'+i+'"><div class="script-head-left"><span class="script-num">'+(i+1)+'</span><span class="script-title">'+s.title+'</span></div><div style="display:flex;align-items:center;gap:8px"><span class="script-dur">'+s.dur+'</span><span class="script-toggle" id="stog'+i+'"><svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></div></div>';
+html+='<div class="script-body" id="sbody'+i+'">';
+// Caption
+html+='<div style="background:var(--bg);border-radius:6px;padding:10px 12px;margin-bottom:10px"><div class="meta-key" style="margin-bottom:4px">推荐文案 (可直接复制)</div><div style="font-size:13px;line-height:1.7">'+s.caption+'</div><div style="font-size:11px;color:var(--cyan);margin-top:6px">'+s.hashtags+'</div></div>';
+for(var j=0;j<s.scenes.length;j++){
+var sc=s.scenes[j];
+html+='<div class="scene-item"><div class="scene-time">'+sc.time+'</div><div class="scene-label">'+sc.label+'</div><div class="scene-desc">'+sc.desc+'</div></div>';
+}
+html+='<div class="script-meta"><div class="meta-item"><div class="meta-key">BGM建议</div>'+s.bgm+'</div><div class="meta-item"><div class="meta-key">发布时间</div>'+s.postTime+'</div></div>';
+html+='</div></div>';
+}
+var panel=document.getElementById('tab-scripts');panel.innerHTML=html;
+panel.addEventListener('click',function(e){
+var head=e.target.closest('.script-head');if(!head)return;
+var idx=head.getAttribute('data-idx');
+var body=document.getElementById('sbody'+idx);var tog=document.getElementById('stog'+idx);
+if(body.classList.contains('open')){body.classList.remove('open');tog.classList.remove('open');}
+else{body.classList.add('open');tog.classList.add('open');}
+});
 }
 
 function renderInsights(){
-  var d=currentData.topics;
-  // Stats
-  var highConf=0;for(var i=0;i<d.length;i++){if(d[i].conf>=80)highConf++;}
-  var html='<div class="stat-grid">';
-  html+='<div class="stat-card"><div class="stat-val">'+d.length+'</div><div class="stat-label">预测覆盖话题数</div></div>';
-  html+='<div class="stat-card"><div class="stat-val">'+Math.round(highConf/d.length*100)+'%</div><div class="stat-label">高置信度话题占比</div></div>';
-  html+='<div class="stat-card"><div class="stat-val">3-5天</div><div class="stat-label">推荐发布窗口</div></div>';
-  html+='<div class="stat-card"><div class="stat-val">'+Math.round((highConf/d.length)*87)+'%</div><div class="stat-label">预计爆款率</div></div>';
-  html+='</div>';
-
-  // Platform bars
-  var plats=currentData.platforms;
-  html+='<div class="chart-section"><div class="chart-title">平台趋势强度对比</div>';
-  for(var p=0;p<plats.length;p++){
-    var val=Math.floor(Math.random()*30)+65;
-    var color=val>=85?'var(--green)':val>=70?'var(--cyan)':'var(--yellow)';
-    html+='<div class="bar-row"><span class="bar-label">'+plats[p]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+val+'%;background:'+color+'"></div></div><span class="bar-val">'+val+'</span></div>';
-  }
-  html+='</div>';
-
-  // Heatmap
-  html+='<div class="chart-section"><div class="chart-title">最佳发布时间热力图</div><div class="heatmap">';
-  html+='<div class="hm-label"></div>';
-  for(var c=0;c<HM_COLS.length;c++){html+='<div class="hm-day">'+HM_COLS[c]+'</div>';}
-  for(var r=0;r<HEATMAP.length;r++){
-    html+='<div class="hm-label">'+HM_ROWS[r]+'</div>';
-    for(var cc=0;cc<HEATMAP[r].length;cc++){
-      html+='<div class="hm-cell hm-'+HEATMAP[r][cc]+'"></div>';
-    }
-  }
-  html+='</div></div>';
-
-  document.getElementById('tab-insights').innerHTML=html;
+var d=currentData.topics;
+var highConf=0;for(var i=0;i<d.length;i++){if(d[i].conf>=80)highConf++;}
+var html='<div class="stat-grid">';
+html+='<div class="stat-card"><div class="stat-val">'+d.length+'</div><div class="stat-label">预测覆盖话题数</div></div>';
+html+='<div class="stat-card"><div class="stat-val">'+Math.round(highConf/d.length*100)+'%</div><div class="stat-label">高置信度话题占比</div></div>';
+html+='<div class="stat-card"><div class="stat-val">3-5天</div><div class="stat-label">推荐发布窗口</div></div>';
+html+='<div class="stat-card"><div class="stat-val">'+Math.round((highConf/d.length)*87)+'%</div><div class="stat-label">预计爆款率</div></div>';
+html+='</div>';
+var plats=currentData.platforms;
+html+='<div class="chart-section"><div class="chart-title">平台趋势强度对比</div>';
+var platVals=[];for(var p=0;p<plats.length;p++){platVals.push(Math.floor(Math.random()*30)+65);}
+for(var p2=0;p2<plats.length;p2++){
+var val=platVals[p2];var color=val>=85?'var(--green)':val>=70?'var(--cyan)':'var(--yellow)';
+html+='<div class="bar-row"><span class="bar-label">'+plats[p2]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+val+'%;background:'+color+'"></div></div><span class="bar-val">'+val+'</span></div>';
+}
+html+='</div>';
+html+='<div class="chart-section"><div class="chart-title">最佳发布时间热力图</div><div class="heatmap">';
+html+='<div class="hm-label"></div>';
+for(var c=0;c<HM_COLS.length;c++){html+='<div class="hm-day">'+HM_COLS[c]+'</div>';}
+for(var r=0;r<HEATMAP.length;r++){
+html+='<div class="hm-label">'+HM_ROWS[r]+'</div>';
+for(var cc=0;cc<HEATMAP[r].length;cc++){html+='<div class="hm-cell hm-'+HEATMAP[r][cc]+'"></div>';}
+}
+html+='</div></div>';
+document.getElementById('tab-insights').innerHTML=html;
 }
 
 function exportReport(){
-  var d=currentData;
-  var lines=[];
-  lines.push('TrendPulse AI 分析报告');
-  lines.push('========================');
-  lines.push('领域: '+d.vertical);
-  lines.push('账号类型: '+d.account);
-  lines.push('目标平台: '+d.platforms.join(', '));
-  lines.push('');
-  lines.push('【趋势预测】');
-  for(var i=0;i<d.topics.length;i++){
-    var t=d.topics[i];
-    lines.push((i+1)+'. '+t.name+' | 置信度:'+t.conf+'% | '+t.days+'天后爆发 | 竞争度:'+t.comp+' | 等级:'+t.rank);
-  }
-  lines.push('');
-  lines.push('【脚本方案】');
-  for(var s=0;s<d.scripts.length;s++){
-    var sc=d.scripts[s];
-    lines.push('脚本'+(s+1)+': '+sc.title+' ('+sc.dur+')');
-    for(var j=0;j<sc.scenes.length;j++){
-      var scene=sc.scenes[j];
-      lines.push('  ['+scene.time+'] '+scene.label+' — '+scene.desc);
-    }
-    lines.push('  BGM: '+sc.bgm+' | 发布时间: '+sc.postTime);
-    lines.push('');
-  }
-  var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='TrendPulse_Report.txt';
-  document.body.appendChild(a);a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+var d=currentData;var L=[];var sep='════════════════════════════════════════════════';var sep2='────────────────────────────────────────────────';
+L.push('');
+L.push('  ╔══════════════════════════════════════════╗');
+L.push('  ║     TrendPulse AI  爆款内容预测报告      ║');
+L.push('  ╚══════════════════════════════════════════╝');
+L.push('');
+L.push('  生成时间: '+d.timestamp);
+L.push('  分析领域: '+d.vertical);
+L.push('  账号类型: '+d.account);
+L.push('  目标平台: '+d.platforms.join(' / '));
+L.push('');
+L.push(sep);
+L.push('  PART 1  趋势预测 TOP 10');
+L.push(sep);
+L.push('');
+
+var sRank=d.topics.slice().sort(function(a,b){return b.conf-a.conf;});
+for(var i=0;i<sRank.length;i++){
+var t=sRank[i];
+var star=t.rank==='S'?'★★★':t.rank==='A'?'★★☆':'★☆☆';
+var bar='';var barLen=Math.round(t.conf/5);for(var b=0;b<barLen;b++)bar+='█';for(var b2=barLen;b2<20;b2++)bar+='░';
+L.push('  ['+(i+1)+']  '+t.name);
+L.push('      置信度: '+bar+' '+t.conf+'%');
+L.push('      推荐等级: '+star+' ('+t.rank+'级)  |  爆发时间: '+t.days+'天后  |  竞争度: '+t.comp);
+L.push('      关联平台: '+t.plat);
+L.push('      推荐标签: '+t.tags);
+L.push('');
+}
+
+L.push(sep);
+L.push('  PART 2  爆款脚本方案 (可直接使用)');
+L.push(sep);
+
+for(var s=0;s<d.scripts.length;s++){
+var sc=d.scripts[s];
+L.push('');
+L.push('  ┌─ 脚本 '+(s+1)+': '+sc.title+' ─┐');
+L.push('  │ 时长: '+sc.dur+'  |  发布时间: '+sc.postTime);
+L.push('  │ BGM: '+sc.bgm);
+L.push('  └──────────────────────────────┘');
+L.push('');
+L.push('  【推荐文案】直接复制发布:');
+L.push('  '+sc.caption);
+L.push('');
+L.push('  【推荐标签】');
+L.push('  '+sc.hashtags);
+L.push('');
+L.push('  【分镜脚本】');
+for(var j=0;j<sc.scenes.length;j++){
+var scene=sc.scenes[j];
+L.push('  ['+scene.time+'] '+scene.label);
+L.push('    → '+scene.desc);
+}
+L.push('');
+L.push(sep2);
+}
+
+L.push('');
+L.push(sep);
+L.push('  PART 3  数据洞察摘要');
+L.push(sep);
+L.push('');
+var highConf=0;for(var h=0;h<d.topics.length;h++){if(d.topics[h].conf>=80)highConf++;}
+L.push('  预测覆盖话题数 ········ '+d.topics.length);
+L.push('  高置信度占比 ·········· '+Math.round(highConf/d.topics.length*100)+'%');
+L.push('  推荐发布窗口 ·········· 3-5天内');
+L.push('  预计爆款率 ············ '+Math.round((highConf/d.topics.length)*87)+'%');
+L.push('');
+L.push('  【平台推荐发布时间】');
+L.push('  抖音/快手: 7:00-9:00 / 12:00-13:00 / 18:00-22:00');
+L.push('  小红书: 7:30-9:00 / 12:00-13:30 / 17:30-21:00');
+L.push('  B站: 10:00-12:00 / 18:00-22:00');
+L.push('  YouTube/TikTok: 根据目标时区 18:00-21:00');
+L.push('');
+L.push(sep);
+L.push('  PART 4  执行清单 (Action Items)');
+L.push(sep);
+L.push('');
+L.push('  □ 1. 选定S级话题,优先制作排名前3的选题');
+L.push('  □ 2. 按分镜脚本准备拍摄素材和BGM');
+L.push('  □ 3. 复制推荐文案,根据个人风格微调');
+L.push('  □ 4. 在推荐时间窗口发布内容');
+L.push('  □ 5. 发布后2小时内积极回复评论互动');
+L.push('  □ 6. 发布后24小时检查数据表现');
+L.push('  □ 7. 48小时后根据数据决定是否追投/二创');
+L.push('');
+L.push(sep2);
+L.push('  Powered by TrendPulse AI | MuleRun Agent Store');
+L.push('  每次运行生成独立报告,数据基于多平台实时分析');
+L.push(sep2);
+L.push('');
+
+var blob=new Blob([L.join('\n')],{type:'text/plain;charset=utf-8'});
+var url=URL.createObjectURL(blob);
+var a=document.createElement('a');
+a.href=url;a.download='TrendPulse_爆款报告_'+d.vertical+'_'+d.timestamp.replace(/[\/\s:]/g,'')+'.txt';
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+URL.revokeObjectURL(url);
 }
 
 function finishSession(){
-  // Signal MuleRun parent iframe that session is complete
-  try{
-    if(window.parent&&window.parent!==window){
-      window.parent.postMessage({type:'session-end',status:'completed'},'*');
-    }
-  }catch(e){}
+document.getElementById('phase3').style.display='none';
+var el=document.getElementById('phase4');
+el.style.display='block';
+el.innerHTML='<div class="session-end"><div class="session-end-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h3>分析完成</h3><p>本次预测报告已生成完毕。如需新的分析请重新运行。</p></div>';
+document.getElementById('p3').className='phase-dot done';
+try{if(window.parent&&window.parent!==window){window.parent.postMessage({type:'session-end',status:'completed'},'*');}}catch(e){}
 }
 
-/* ---- TAB SWITCHING ---- */
 function initTabs(){
-  document.getElementById('tabBar').addEventListener('click',function(e){
-    var btn=e.target.closest('.tab-btn');
-    if(!btn)return;
-    var tabs=document.querySelectorAll('.tab-btn');
-    var panels=document.querySelectorAll('.tab-panel');
-    for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');}
-    for(var j=0;j<panels.length;j++){panels[j].classList.remove('active');}
-    btn.classList.add('active');
-    var panel=document.getElementById('tab-'+btn.getAttribute('data-tab'));
-    if(panel)panel.classList.add('active');
-  });
+document.getElementById('tabBar').addEventListener('click',function(e){
+var btn=e.target.closest('.tab-btn');if(!btn)return;
+var tabs=document.querySelectorAll('.tab-btn');var panels=document.querySelectorAll('.tab-panel');
+for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');}
+for(var j=0;j<panels.length;j++){panels[j].classList.remove('active');}
+btn.classList.add('active');
+var panel=document.getElementById('tab-'+btn.getAttribute('data-tab'));
+if(panel)panel.classList.add('active');
+});
 }
 
-/* ---- INIT ---- */
-initPlatforms();
-initTabs();
-updateStartBtn();
-
-// Expose minimal API
-window._app={
-  start:startAnalysis,
-  finish:finishSession,
-  exportReport:exportReport
-};
-
-// Cleanup on unload
+initPlatforms();initTabs();updateStartBtn();
+window._app={start:startAnalysis,finish:finishSession,exportReport:exportReport};
 window.addEventListener('beforeunload',function(){clearAllTimeouts();});
 })();
 </script>
