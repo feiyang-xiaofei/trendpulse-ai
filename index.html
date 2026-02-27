@@ -129,11 +129,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 </div>
 <div id="phase1">
 <div class="form-section">
-<div class="form-label">TARGET PLATFORMS</div>
+<div class="form-label" id="lblPlat">TARGET PLATFORMS</div>
 <div class="checkbox-grid" id="platformGrid"></div>
 </div>
 <div class="form-section">
-<div class="form-label">CONTENT VERTICAL</div>
+<div class="form-label" id="lblVert">CONTENT VERTICAL</div>
 <div class="sel-wrap"><select id="selVertical">
 <option value="food">美食</option><option value="beauty">美妆</option><option value="tech">科技</option>
 <option value="life">生活</option><option value="comedy">搞笑</option><option value="knowledge">知识</option>
@@ -142,7 +142,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 </select></div>
 </div>
 <div class="form-section">
-<div class="form-label">ACCOUNT TYPE</div>
+<div class="form-label" id="lblAcct">ACCOUNT TYPE</div>
 <div class="sel-wrap"><select id="selAccount">
 <option value="creator">个人创作者</option><option value="brand">品牌官方号</option>
 <option value="mcn">MCN机构</option><option value="ecom">电商带货</option>
@@ -159,16 +159,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 </div>
 <div id="phase3" style="display:none">
 <div class="tabs" id="tabBar">
-<button class="tab-btn active" data-tab="trends">趋势预测</button>
-<button class="tab-btn" data-tab="scripts">脚本方案</button>
-<button class="tab-btn" data-tab="insights">数据洞察</button>
+<button class="tab-btn active" data-tab="trends" id="tabBtn1">趋势预测</button>
+<button class="tab-btn" data-tab="scripts" id="tabBtn2">脚本方案</button>
+<button class="tab-btn" data-tab="insights" id="tabBtn3">数据洞察</button>
 </div>
 <div class="tab-panel active" id="tab-trends"></div>
 <div class="tab-panel" id="tab-scripts"></div>
 <div class="tab-panel" id="tab-insights"></div>
 <div class="bottom-actions">
-<button class="btn-export" onclick="window._app.exportReport()">导出爆款报告</button>
-<button class="btn-done" onclick="window._app.finish()">完成并结束</button>
+<button class="btn-export" id="btnExport" onclick="window._app.exportReport()">导出爆款报告</button>
+<button class="btn-done" id="btnFinish" onclick="window._app.finish()">完成并结束</button>
 </div>
 </div>
 <div id="phase4" style="display:none"></div>
@@ -179,6 +179,7 @@ var timeouts=[];
 function addTimeout(fn,ms){var id=setTimeout(fn,ms);timeouts.push(id);return id;}
 function clearAllTimeouts(){for(var i=0;i<timeouts.length;i++)clearTimeout(timeouts[i]);timeouts=[];}
 var sessionUsed=false;
+var LANG=(new URLSearchParams(window.location.search)).get('lang')==='en'?'en':'zh';
 
 var PLATFORMS=['抖音','快手','TikTok','YouTube','X/Twitter','小红书','B站','Instagram'];
 
@@ -396,9 +397,259 @@ scenes:[
 };
 
 var VERT_NAMES={food:'美食',beauty:'美妆',tech:'科技',life:'生活',comedy:'搞笑',knowledge:'知识',travel:'旅行',fitness:'健身',fashion:'穿搭',pets:'宠物'};
+var VERT_NAMES_EN={food:'Food',beauty:'Beauty',tech:'Tech',life:'Lifestyle',comedy:'Comedy',knowledge:'Knowledge',travel:'Travel',fitness:'Fitness',fashion:'Fashion',pets:'Pets'};
+var ACCT_EN={creator:'Individual Creator',brand:'Brand Account',mcn:'MCN Agency',ecom:'E-commerce'};
+var I18N={
+zh:{startBtn:'开始分析',tab1:'趋势预测',tab2:'脚本方案',tab3:'数据洞察',
+thNum:'#',thTopic:'话题',thConf:'置信度',thTrend:'趋势',thBurst:'爆发',thPlat:'平台',thComp:'竞争',thRank:'等级',
+daysAfter:'天后',exportBtn:'导出爆款报告',finishBtn:'完成并结束',
+procMsgs:['正在采集多平台数据...','分析趋势热度...','生成爆款选题...','优化脚本方案...','生成完整报告...'],
+captionLabel:'推荐文案 (可直接复制)',bgmLabel:'BGM建议',postLabel:'发布时间',
+statTopics:'预测覆盖话题数',statHigh:'高置信度话题占比',statWindow:'推荐发布窗口',statRate:'预计爆款率',
+chartPlat:'平台趋势强度对比',chartHeat:'最佳发布时间热力图',
+hmRows:['早间','午间','晚间','深夜'],hmCols:['周一','周二','周三','周四','周五','周六','周日'],
+windowVal:'3-5天',doneTitle:'分析完成',doneDesc:'本次预测报告已生成完毕。如需新的分析请重新运行。',
+rptTitle:'TrendPulse AI  爆款内容预测报告',rptPart1:'趋势预测 TOP 10',rptPart2:'爆款脚本方案 (可直接使用)',
+rptPart3:'数据洞察摘要',rptPart4:'执行清单 (Action Items)',rptGenTime:'生成时间',rptField:'分析领域',rptAcct:'账号类型',rptPlat:'目标平台',
+rptConf:'置信度',rptRank:'推荐等级',rptBurst:'爆发时间',rptComp:'竞争度',rptPlatLabel:'关联平台',rptTags:'推荐标签',
+rptCaption:'推荐文案',rptHashtags:'推荐标签',rptScene:'分镜脚本',rptScript:'脚本',
+rptCover:'预测覆盖话题数',rptHighPct:'高置信度占比',rptWin:'推荐发布窗口',rptRatePct:'预计爆款率',
+rptPlatTime:'平台推荐发布时间',rptActions:['选定S级话题,优先制作排名前3的选题','按分镜脚本准备拍摄素材和BGM','复制推荐文案,根据个人风格微调','在推荐时间窗口发布内容','发布后2小时内积极回复评论互动','发布后24小时检查数据表现','48小时后根据数据决定是否追投/二创'],
+formPlatLabel:'TARGET PLATFORMS',formVertLabel:'CONTENT VERTICAL',formAcctLabel:'ACCOUNT TYPE'},
+en:{startBtn:'Start Analysis',tab1:'Trend Predictions',tab2:'Script Plans',tab3:'Data Insights',
+thNum:'#',thTopic:'Topic',thConf:'Confidence',thTrend:'Trend',thBurst:'Burst',thPlat:'Platform',thComp:'Competition',thRank:'Rank',
+daysAfter:' days',exportBtn:'Export Report',finishBtn:'Finish Session',
+procMsgs:['Collecting multi-platform data...','Analyzing trend signals...','Generating trending topics...','Optimizing script plans...','Generating full report...'],
+captionLabel:'Recommended Caption (copy & post)',bgmLabel:'BGM Suggestion',postLabel:'Post Time',
+statTopics:'Topics Covered',statHigh:'High Confidence Ratio',statWindow:'Recommended Window',statRate:'Predicted Viral Rate',
+chartPlat:'Platform Trend Intensity',chartHeat:'Optimal Posting Schedule',
+hmRows:['Morning','Noon','Evening','Late Night'],hmCols:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+windowVal:'3-5 days',doneTitle:'Analysis Complete',doneDesc:'Your prediction report has been generated. Start a new run for another analysis.',
+rptTitle:'TrendPulse AI  Content Trend Report',rptPart1:'Trend Predictions TOP 10',rptPart2:'Script Plans (Ready to Use)',
+rptPart3:'Data Insights Summary',rptPart4:'Action Items',rptGenTime:'Generated',rptField:'Vertical',rptAcct:'Account Type',rptPlat:'Target Platforms',
+rptConf:'Confidence',rptRank:'Rank',rptBurst:'Burst Time',rptComp:'Competition',rptPlatLabel:'Platforms',rptTags:'Tags',
+rptCaption:'Caption',rptHashtags:'Hashtags',rptScene:'Storyboard',rptScript:'Script',
+rptCover:'Topics Covered',rptHighPct:'High Confidence Ratio',rptWin:'Recommended Window',rptRatePct:'Predicted Viral Rate',
+rptPlatTime:'Platform Posting Schedule',rptActions:['Pick S-rank topics, prioritize top 3','Prepare filming assets and BGM per storyboard','Copy recommended captions, adjust to your style','Publish during recommended time windows','Reply to comments within 2 hours of posting','Check performance data after 24 hours','Decide on boosting/remixing after 48 hours'],
+formPlatLabel:'TARGET PLATFORMS',formVertLabel:'CONTENT VERTICAL',formAcctLabel:'ACCOUNT TYPE'}
+};
+var T=I18N[LANG];
 
-function getTopics(key){return TOPICS[key]||TOPICS.food;}
-function getScripts(key){return SCRIPTS[key]||SCRIPTS.food;}
+var TOPICS_EN={
+food:[
+{name:'5-Minute Breakfast for Workers',conf:94,days:3,plat:'Douyin/Xiaohongshu',comp:'Med',rank:'S',tags:'#QuickBreakfast #MealPrep #MorningRoutine'},
+{name:'Solo Dining Comfort Series',conf:91,days:4,plat:'Bilibili/Xiaohongshu',comp:'Low',rank:'S',tags:'#SoloDining #LivingAlone #Comfort'},
+{name:'Convenience Store Hidden Hacks',conf:87,days:5,plat:'Douyin/Kuaishou',comp:'High',rank:'A',tags:'#ConvenienceStore #FoodHacks #BudgetMeals'},
+{name:'Cheat Day During Fat Loss',conf:83,days:6,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#CheatDay #FatLoss #HealthyEating'},
+{name:'Seasonal Limited Desserts',conf:78,days:7,plat:'Xiaohongshu/Instagram',comp:'Med',rank:'B',tags:'#SeasonalDesserts #SweetTooth #Bakery'},
+{name:'Late Night Kitchen Recreations',conf:92,days:3,plat:'Bilibili/Douyin',comp:'Low',rank:'S',tags:'#LateNightFood #Comfort #HomeCooking'},
+{name:'Full Day Meals Under $5',conf:88,days:4,plat:'Kuaishou/Douyin',comp:'High',rank:'A',tags:'#BudgetMeals #CheapEats #StudentLife'},
+{name:'Exotic Street Food Guide',conf:76,days:8,plat:'YouTube/TikTok',comp:'Low',rank:'B',tags:'#StreetFood #FoodTour #Travel'},
+{name:'Secret Office Snack Hacks',conf:85,days:5,plat:'Douyin/Xiaohongshu',comp:'Med',rank:'A',tags:'#OfficeSnacks #WorkLife #FoodHacks'},
+{name:'Mom\'s Home Recipes Recreated',conf:80,days:6,plat:'Bilibili/Kuaishou',comp:'Low',rank:'A',tags:'#HomeCooking #Nostalgic #FamilyRecipes'}
+],
+beauty:[
+{name:'3-Minute Commute Makeup',conf:93,days:3,plat:'Xiaohongshu/Douyin',comp:'High',rank:'S',tags:'#QuickMakeup #CommuteLook #Minimal'},
+{name:'Budget Beauty Finds Under $15',conf:90,days:4,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'S',tags:'#BudgetBeauty #Affordable #Dupes'},
+{name:'Seasonal Skincare Emergency',conf:86,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#Skincare #SeasonalChange #SensitiveSkin'},
+{name:'No-Makeup Makeup Look',conf:82,days:6,plat:'Douyin/TikTok',comp:'High',rank:'A',tags:'#NoMakeupMakeup #Natural #CleanGirl'},
+{name:'Ingredient-Focused Reviews',conf:79,days:7,plat:'Bilibili/Xiaohongshu',comp:'Low',rank:'B',tags:'#Ingredients #SkincareReview #Science'},
+{name:'Celebrity Makeup Recreation',conf:91,days:3,plat:'Douyin/TikTok',comp:'Med',rank:'S',tags:'#CelebrityMakeup #Tutorial #Transformation'},
+{name:'DIY Nail Art at Home',conf:84,days:5,plat:'Xiaohongshu/Instagram',comp:'Low',rank:'A',tags:'#NailArt #DIY #Beauty'},
+{name:'Hair Transformation Challenge',conf:77,days:8,plat:'Douyin/Kuaishou',comp:'Med',rank:'B',tags:'#HairTransformation #Makeover #GlowUp'},
+{name:'Men\'s Skincare Starter Guide',conf:88,days:4,plat:'Bilibili/Xiaohongshu',comp:'Low',rank:'A',tags:'#MensSkincare #Grooming #Beginner'},
+{name:'Beauty Treatment Red Flags',conf:81,days:6,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#BeautyTreatment #RedFlags #HonestReview'}
+],
+tech:[
+{name:'AI Tools to Double Productivity',conf:95,days:2,plat:'Bilibili/YouTube',comp:'High',rank:'S',tags:'#AITools #Productivity #WorkSmarter'},
+{name:'Budget Phone Deep Comparison',conf:89,days:4,plat:'Bilibili/Douyin',comp:'High',rank:'S',tags:'#BudgetPhone #TechReview #Comparison'},
+{name:'Complete Smart Home Setup',conf:85,days:5,plat:'Bilibili/Xiaohongshu',comp:'Med',rank:'A',tags:'#SmartHome #IoT #TechLife'},
+{name:'Coding From Zero — Beginner',conf:82,days:6,plat:'Bilibili/YouTube',comp:'Med',rank:'A',tags:'#LearnToCode #Beginner #Career'},
+{name:'Hidden Phone Features',conf:78,days:7,plat:'Douyin/Bilibili',comp:'Low',rank:'B',tags:'#PhoneTips #HiddenFeatures #TechHacks'},
+{name:'Remote Work Essential Tools',conf:90,days:3,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'S',tags:'#RemoteWork #WFH #Productivity'},
+{name:'Gaming Peripherals Guide',conf:83,days:5,plat:'Bilibili/Douyin',comp:'High',rank:'A',tags:'#Gaming #Peripherals #Setup'},
+{name:'Mobile Photography Masterclass',conf:87,days:4,plat:'Douyin/Xiaohongshu',comp:'Med',rank:'A',tags:'#MobilePhotography #PhotoTips #Editing'},
+{name:'Cloud Services Beginner Guide',conf:75,days:8,plat:'Bilibili/YouTube',comp:'Low',rank:'B',tags:'#CloudComputing #Guide #Developer'},
+{name:'Best Open Source Projects 2026',conf:80,days:6,plat:'Bilibili/YouTube',comp:'Low',rank:'A',tags:'#OpenSource #GitHub #DevTools'}
+],
+life:[
+{name:'Budget Apartment Makeover',conf:93,days:3,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'S',tags:'#ApartmentMakeover #Budget #RentalDecor'},
+{name:'Minimalist Declutter Guide',conf:88,days:4,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'S',tags:'#Minimalism #Declutter #Organization'},
+{name:'Living Alone Safety Tips',conf:85,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#SafetyTips #LivingAlone #Essentials'},
+{name:'Best Commute Essentials',conf:82,days:6,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#Commute #Essentials #DailyCarry'},
+{name:'Weekend Day-in-Life Vlog',conf:79,days:7,plat:'Bilibili/Xiaohongshu',comp:'Low',rank:'B',tags:'#WeekendVlog #DayInLife #Routine'},
+{name:'30-Day Savings Challenge',conf:91,days:3,plat:'Douyin/Kuaishou',comp:'Med',rank:'S',tags:'#SavingsChallenge #BudgetTips #Money'},
+{name:'Moving Day Packing Guide',conf:84,days:5,plat:'Xiaohongshu/Douyin',comp:'Low',rank:'A',tags:'#MovingTips #Packing #Apartment'},
+{name:'Introvert Social Survival',conf:86,days:4,plat:'Bilibili/Xiaohongshu',comp:'Med',rank:'A',tags:'#Introvert #SocialTips #SelfHelp'},
+{name:'Morning Routine Builder',conf:77,days:8,plat:'Xiaohongshu/Douyin',comp:'Low',rank:'B',tags:'#MorningRoutine #Habits #Productivity'},
+{name:'Affordable Home Upgrades',conf:83,days:5,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#HomeUpgrades #Affordable #Lifestyle'}
+],
+comedy:[
+{name:'Most Awkward Moments Comp.',conf:95,days:2,plat:'Douyin/Kuaishou',comp:'High',rank:'S',tags:'#Awkward #Cringe #FunnyMoments'},
+{name:'Dialect Challenge Series',conf:90,days:3,plat:'Douyin/Kuaishou',comp:'Med',rank:'S',tags:'#DialectChallenge #Language #Funny'},
+{name:'Corporate Life Comedy Skit',conf:87,days:4,plat:'Bilibili/Douyin',comp:'Med',rank:'A',tags:'#OfficeComedy #WorkLife #Skit'},
+{name:'Couple Contrast Daily Life',conf:84,days:5,plat:'Douyin/Kuaishou',comp:'High',rank:'A',tags:'#CoupleGoals #Funny #Relationship'},
+{name:'Pets Being Hilarious',conf:81,days:6,plat:'Douyin/Kuaishou',comp:'Med',rank:'A',tags:'#FunnyPets #Animals #Comedy'},
+{name:'Impression Fail Compilation',conf:92,days:3,plat:'TikTok/Douyin',comp:'Low',rank:'S',tags:'#Impression #Fails #Challenge'},
+{name:'AI Voice-Over Parodies',conf:86,days:4,plat:'Bilibili/Douyin',comp:'Med',rank:'A',tags:'#AIVoice #Parody #Remix'},
+{name:'Gen Z vs Corporate Culture',conf:78,days:7,plat:'Bilibili/Douyin',comp:'High',rank:'B',tags:'#GenZ #Corporate #Workplace'},
+{name:'Plot Twist Short Films',conf:89,days:3,plat:'Douyin/Kuaishou',comp:'Med',rank:'S',tags:'#PlotTwist #ShortFilm #Drama'},
+{name:'Street Interview Highlights',conf:76,days:8,plat:'Douyin/YouTube',comp:'Low',rank:'B',tags:'#StreetInterview #Highlights #Random'}
+],
+knowledge:[
+{name:'60-Second Fun Facts',conf:94,days:2,plat:'Douyin/Bilibili',comp:'Med',rank:'S',tags:'#FunFacts #DidYouKnow #Learning'},
+{name:'Obscure History Stories',conf:89,days:4,plat:'Bilibili/YouTube',comp:'Low',rank:'S',tags:'#History #Stories #Education'},
+{name:'Practical Psychology Tips',conf:86,days:5,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'A',tags:'#Psychology #Tips #Communication'},
+{name:'Economics 101 Series',conf:82,days:6,plat:'Bilibili/YouTube',comp:'Med',rank:'A',tags:'#Economics #Finance #Education'},
+{name:'Science Myth Busters',conf:79,days:7,plat:'Bilibili/Douyin',comp:'Low',rank:'B',tags:'#MythBusting #Science #Facts'},
+{name:'Book Summary Essentials',conf:90,days:3,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'S',tags:'#BookSummary #Reading #Knowledge'},
+{name:'Workplace Communication 101',conf:85,days:5,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#Communication #Career #Skills'},
+{name:'Legal Rights Everyone Needs',conf:83,days:5,plat:'Bilibili/Douyin',comp:'Low',rank:'A',tags:'#LegalRights #KnowYourRights #Law'},
+{name:'Mind Mapping Mastery',conf:77,days:8,plat:'Bilibili/Xiaohongshu',comp:'Low',rank:'B',tags:'#MindMapping #StudyTips #Learning'},
+{name:'World\'s Unsolved Mysteries',conf:88,days:4,plat:'Bilibili/YouTube',comp:'Med',rank:'A',tags:'#Mysteries #Unsolved #Curiosity'}
+],
+travel:[
+{name:'Hidden Gem Destinations',conf:93,days:3,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'S',tags:'#HiddenGems #Travel #OffTheBeaten'},
+{name:'Budget Travel Hacks',conf:89,days:4,plat:'Xiaohongshu/Bilibili',comp:'High',rank:'S',tags:'#BudgetTravel #TravelHacks #SaveMoney'},
+{name:'Hotel Horror Stories',conf:86,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#HotelReview #TravelFails #Honest'},
+{name:'City Walk Route Guides',conf:84,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#CityWalk #WalkingTour #PhotoSpots'},
+{name:'Train Window Scenery',conf:80,days:7,plat:'Douyin/Kuaishou',comp:'Low',rank:'B',tags:'#TrainTravel #Scenery #Relaxing'},
+{name:'Perfect Day Trip Plans',conf:91,days:3,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'S',tags:'#DayTrip #WeekendGetaway #Planning'},
+{name:'Travel Photo Poses Guide',conf:87,days:4,plat:'Xiaohongshu/TikTok',comp:'High',rank:'A',tags:'#TravelPhotos #PoseGuide #Instagram'},
+{name:'Cheap Flight Booking Tips',conf:82,days:6,plat:'Xiaohongshu/Douyin',comp:'Low',rank:'A',tags:'#CheapFlights #BookingTips #Travel'},
+{name:'Road Trip Packing List',conf:78,days:7,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'B',tags:'#RoadTrip #PackingList #CarTravel'},
+{name:'Local Food Map Guides',conf:85,days:5,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#FoodMap #LocalFood #FoodTour'}
+],
+fitness:[
+{name:'Home HIIT Workout Plan',conf:92,days:3,plat:'Bilibili/Xiaohongshu',comp:'High',rank:'S',tags:'#HIIT #HomeWorkout #NoEquipment'},
+{name:'5-Min Office Desk Stretch',conf:90,days:3,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'S',tags:'#DeskStretch #OfficeWorkout #Posture'},
+{name:'Beginner Muscle Building',conf:85,days:5,plat:'Bilibili/Douyin',comp:'Med',rank:'A',tags:'#MuscleBuilding #Beginner #GymLife'},
+{name:'Running Starter Guide',conf:82,days:6,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'A',tags:'#Running #Beginner #Marathon'},
+{name:'Meal Prep for Fat Loss',conf:88,days:4,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#MealPrep #FatLoss #HealthyEating'},
+{name:'Yoga for Beginners 30-Day',conf:86,days:4,plat:'Bilibili/Xiaohongshu',comp:'Med',rank:'A',tags:'#Yoga #Beginner #Flexibility'},
+{name:'Posture Correction Workout',conf:84,days:5,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'A',tags:'#Posture #Correction #Confidence'},
+{name:'Bedtime Relaxation Stretch',conf:79,days:7,plat:'Xiaohongshu/Douyin',comp:'Low',rank:'B',tags:'#BedtimeStretch #Sleep #Relaxation'},
+{name:'Home Dumbbell Full Body',conf:81,days:6,plat:'Bilibili/Douyin',comp:'Med',rank:'A',tags:'#Dumbbell #HomeGym #FullBody'},
+{name:'Abs in 4 Weeks Challenge',conf:91,days:3,plat:'Douyin/Xiaohongshu',comp:'High',rank:'S',tags:'#AbsChallenge #CoreWorkout #Results'}
+],
+fashion:[
+{name:'One Piece Multiple Looks',conf:93,days:3,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'S',tags:'#Versatile #StylingTips #SaveMoney'},
+{name:'Curvy Girl Slimming Outfits',conf:90,days:3,plat:'Xiaohongshu/Douyin',comp:'High',rank:'S',tags:'#CurvyFashion #SlimmingTips #PlusSize'},
+{name:'Office Wear Style Formula',conf:86,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#OfficeWear #Workwear #Minimal'},
+{name:'Seasonal Layering Guide',conf:83,days:6,plat:'Xiaohongshu/Instagram',comp:'Med',rank:'A',tags:'#Layering #FallFashion #Styling'},
+{name:'Thrift Store Vintage Finds',conf:79,days:7,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'B',tags:'#ThriftStore #Vintage #Secondhand'},
+{name:'Men\'s Basics Styling Guide',conf:88,days:4,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'A',tags:'#MensFashion #Basics #Capsule'},
+{name:'Accessories Transform Outfits',conf:85,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#Accessories #StyleTips #Jewelry'},
+{name:'Sneaker Styling Inspiration',conf:82,days:6,plat:'Xiaohongshu/Douyin',comp:'High',rank:'A',tags:'#Sneakers #StreetStyle #OOTD'},
+{name:'Wardrobe Declutter Guide',conf:77,days:8,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'B',tags:'#WardrobeEdit #Declutter #Capsule'},
+{name:'Preppy Style Comeback',conf:91,days:3,plat:'Xiaohongshu/TikTok',comp:'Med',rank:'S',tags:'#Preppy #ClassicStyle #Campus'}
+],
+pets:[
+{name:'Cats Being Weird Comp.',conf:94,days:2,plat:'Douyin/Bilibili',comp:'Med',rank:'S',tags:'#CatsBeingCats #Funny #CatLife'},
+{name:'First-Time Cat Owner Guide',conf:89,days:4,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'S',tags:'#NewCatOwner #CatCare #Essentials'},
+{name:'Best Dog Walking Gear',conf:85,days:5,plat:'Xiaohongshu/Douyin',comp:'Med',rank:'A',tags:'#DogWalking #PetGear #DogLife'},
+{name:'Homemade Pet Food Recipes',conf:83,days:6,plat:'Xiaohongshu/Bilibili',comp:'Low',rank:'A',tags:'#PetFood #Homemade #PetNutrition'},
+{name:'Exotic Pets Daily Diary',conf:78,days:7,plat:'Bilibili/Douyin',comp:'Low',rank:'B',tags:'#ExoticPets #Hamster #Reptiles'},
+{name:'Cat vs Dog Battle Royale',conf:92,days:3,plat:'Douyin/Kuaishou',comp:'High',rank:'S',tags:'#CatVsDog #FunnyPets #Animals'},
+{name:'Pet Costume Fashion Show',conf:86,days:4,plat:'Douyin/TikTok',comp:'Med',rank:'A',tags:'#PetCostume #CutePets #Dress'},
+{name:'Rescue Animal Stories',conf:81,days:6,plat:'Bilibili/Douyin',comp:'Low',rank:'A',tags:'#Rescue #AdoptDontShop #HeartWarming'},
+{name:'Vet Visit Survival Guide',conf:84,days:5,plat:'Xiaohongshu/Bilibili',comp:'Med',rank:'A',tags:'#VetVisit #PetHealth #Tips'},
+{name:'Multi-Pet Household Life',conf:76,days:8,plat:'Bilibili/Kuaishou',comp:'Low',rank:'B',tags:'#MultiPet #PetFamily #Daily'}
+]
+};
+
+var SCRIPTS_EN={
+food:[
+{title:'5-Minute Breakfast for Workers',dur:'15s',bgm:'Upbeat Japanese / Cozy BGM',postTime:'Weekdays 7:00-8:30 AM',
+caption:'5 minutes to prep your entire week of breakfasts! No more skipping meals on your way to work. Simple, fast, delicious — try it tomorrow!',
+hashtags:'#QuickBreakfast #MealPrep #MorningRoutine #5MinMeals #WorkerLife',
+scenes:[
+{time:'0-3s',label:'Hook',desc:'"5 minutes for a WEEK of breakfasts?" — alarm clock + getting up shot'},
+{time:'3-8s',label:'Ingredients',desc:'Quick showcase of 5 ingredients (eggs/toast/milk/lettuce/cheese), beat-synced cuts, 0.8s each'},
+{time:'8-13s',label:'Cooking Process',desc:'2x speed cooking montage + close-ups, cozy BGM drops on beat'},
+{time:'13-15s',label:'Final Reveal',desc:'Plated close-up + steam rising + text overlay "Follow for more breakfast ideas"'}
+]},
+{title:'Solo Dining Comfort Series',dur:'60s',bgm:'Piano / ASMR Ambient',postTime:'Evening 7:00-9:00 PM',
+caption:'Today I\'m cooking just for myself. Living alone doesn\'t mean eating badly — a warm homemade meal can heal an entire exhausting day.',
+hashtags:'#SoloDining #LivingAlone #Comfort #HomeCooking #SelfCare',
+scenes:[
+{time:'0-5s',label:'Setting the Mood',desc:'Warm lighting + quiet kitchen wide shot, subtitle fades in: "Today I cook just for me"'},
+{time:'5-25s',label:'Prep Work',desc:'Slow-paced chopping, washing — ASMR sounds, macro close-ups, natural light'},
+{time:'25-45s',label:'Cooking',desc:'Sizzle + boiling + steam close-ups, alternating medium and tight shots'},
+{time:'45-60s',label:'Enjoying the Meal',desc:'Quiet table setting, chopstick close-up, ending subtitle "What did you eat today?" for engagement'}
+]},
+{title:'Convenience Store Hidden Hacks',dur:'30s',bgm:'Electronic / Beat-Synced',postTime:'Noon 11:30 AM-1:00 PM',
+caption:'Convenience store staff\'s secret hacks! Turn $3 worth of items into a $15 meal experience. Say goodbye to delivery apps!',
+hashtags:'#ConvenienceStore #FoodHacks #BudgetMeals #DIY #LifeHack',
+scenes:[
+{time:'0-3s',label:'Suspense Open',desc:'"Only store staff know these hacks 👀" — storefront entrance shot'},
+{time:'3-12s',label:'Shopping',desc:'In-store filming, grabbing 3-4 items, showing price tags, total cost overlay'},
+{time:'12-25s',label:'DIY Assembly',desc:'Creative combo process, beat-synced cuts, speed ramp normal↔fast, "ding" sound effect'},
+{time:'25-30s',label:'Taste Test',desc:'Genuine reaction + rating (★★★★☆), prompt "Which combo have you tried?"'}
+]}
+],
+beauty:[
+{title:'3-Minute Commute Makeup',dur:'30s',bgm:'Upbeat Pop / Morning Vibes',postTime:'Weekdays 6:30-8:00 AM',
+caption:'3-minute out-the-door makeup! The ultimate lifesaver for late sleepers. Only 4 products for a full face — from bare to polished, just like that!',
+hashtags:'#QuickMakeup #CommuteLook #Minimal #3MinMakeup #LazyGirlMakeup',
+scenes:[
+{time:'0-3s',label:'Before/After Split',desc:'Side-by-side: bare face vs finished look, text "3 min — never late again"'},
+{time:'3-15s',label:'Base + Concealer',desc:'Minimal steps demo, one cushion does it all, countdown timer top-right'},
+{time:'15-25s',label:'Eyes + Lips',desc:'2 steps: one-swipe eyeshadow + lipstick, emphasis on speed'},
+{time:'25-30s',label:'Final Look',desc:'Walking-out-the-door scene + product list overlay, prompt "Save this for later"'}
+]},
+{title:'Budget Beauty Finds Under $15',dur:'60s',bgm:'Acoustic / Campus Vibes',postTime:'Weekends 10:00 AM-12:00 PM',
+caption:'Complete set under $15! Students, these budget finds genuinely rival high-end brands. Every single item is a personal favorite!',
+hashtags:'#BudgetBeauty #Affordable #Dupes #BestFinds #StudentBudget',
+scenes:[
+{time:'0-5s',label:'Price Shock',desc:'"Full set under $15?!" — stacked products with price tags'},
+{time:'5-30s',label:'Product Reviews',desc:'Each product 8-10s: swatch/apply on face, unit price shown'},
+{time:'30-50s',label:'Full Look Tutorial',desc:'Complete makeup using all recommended products, clear steps'},
+{time:'50-60s',label:'Wear Test Results',desc:'8-hour wear check + product list, prompt to save/share'}
+]},
+{title:'Celebrity Makeup Recreation',dur:'60s',bgm:'Cinematic / Character Theme',postTime:'Weekends 6:00-8:00 PM',
+caption:'Today\'s challenge: recreating XX\'s iconic look! From bare face to full transformation — how close did I get? Rate me in the comments!',
+hashtags:'#CelebrityMakeup #Tutorial #Transformation #MakeupChallenge #COS',
+scenes:[
+{time:'0-5s',label:'Reference Photo',desc:'Show celebrity reference image, text "Today\'s challenge: XX makeup"'},
+{time:'5-35s',label:'Makeup Process',desc:'Key steps detailed (brows/eyes/lips), highlighting technique difficulties'},
+{time:'35-50s',label:'Styling Complete',desc:'Accessories + hair + outfit gradually assembled, BGM builds'},
+{time:'50-60s',label:'Side-by-Side',desc:'Split screen same-angle comparison, poll prompt "How close? Rate 1-10"'}
+]}
+],
+tech:[
+{title:'AI Tools to Double Productivity',dur:'60s',bgm:'Electronic / Futuristic',postTime:'Weekdays 12:00-1:00 PM',
+caption:'Still working overtime? These 3 AI tools will get you home on time! Personally tested 200% efficiency boost — every worker needs to save this!',
+hashtags:'#AITools #Productivity #WorkSmarter #LeaveOnTime #OfficeTools',
+scenes:[
+{time:'0-5s',label:'Pain Point Hook',desc:'"Still burning midnight oil?" — tired worker visual + reveal'},
+{time:'5-25s',label:'Tool Demo 1',desc:'First tool screen recording, split-screen before/after'},
+{time:'25-45s',label:'Tool Demo 2',desc:'Second tool walkthrough, data comparison + efficiency % overlay'},
+{time:'45-60s',label:'Summary List',desc:'Tool roundup list + use case table, prompt "Follow for the complete toolkit"'}
+]},
+{title:'Budget Phone Deep Comparison',dur:'60s',bgm:'Hip-Hop / Tech Review BGM',postTime:'Weekends 2:00-4:00 PM',
+caption:'How good can a $150 phone actually be? 3 budget phones go head-to-head — the results will surprise you! Which one would you pick?',
+hashtags:'#BudgetPhone #TechReview #Comparison #PhoneComparison #ValuePick',
+scenes:[
+{time:'0-5s',label:'Suspense Opening',desc:'"How good can $150 get you?" — 3 phones enter frame'},
+{time:'5-30s',label:'Design Comparison',desc:'3 phones side-by-side: design/feel/display scored, rating table'},
+{time:'30-50s',label:'Performance Test',desc:'Benchmark + gaming test + camera shootout, data visualization'},
+{time:'50-60s',label:'Final Verdict',desc:'Radar chart summary + audience match analysis, vote prompt "Your pick?"'}
+]},
+{title:'Remote Work Essential Tools',dur:'30s',bgm:'Lo-fi / Coffee Shop Ambience',postTime:'Monday 9:00-10:00 AM',
+caption:'Low productivity working from home? These 3 tools changed everything. #2 literally transformed how I work — must save this!',
+hashtags:'#RemoteWork #WFH #Productivity #OfficeTools #WorkFromHome',
+scenes:[
+{time:'0-3s',label:'Relatable Scene',desc:'Messy desk quick-cut to organized setup, "3 tools changed everything"'},
+{time:'3-15s',label:'Software Picks',desc:'3 core tools rapid demo, 4s each, screen recording + face cam'},
+{time:'15-25s',label:'Before/After',desc:'Workflow comparison: before vs after, metric annotations'},
+{time:'25-30s',label:'Wrap-up CTA',desc:'One-line summary + prompt "Share your WFH essentials in comments"'}
+]}
+]
+};
+
+function getTopics(key){return (LANG==='en'?TOPICS_EN:TOPICS)[key]||(LANG==='en'?TOPICS_EN:TOPICS).food;}
+function getScripts(key){return (LANG==='en'?SCRIPTS_EN:SCRIPTS)[key]||(LANG==='en'?SCRIPTS_EN:SCRIPTS).food;}
 
 function makeSpark(conf){
 var pts=[];var h=18;var w=50;var n=8;var base=conf/100;
@@ -440,11 +691,11 @@ var vertical=document.getElementById('selVertical').value;
 currentData={
 topics:getTopics(vertical),
 scripts:getScripts(vertical),
-vertical:VERT_NAMES[vertical]||vertical,
+vertical:LANG==='en'?(VERT_NAMES_EN[vertical]||vertical):(VERT_NAMES[vertical]||vertical),
 verticalKey:vertical,
 platforms:Object.keys(selectedPlatforms),
-account:document.getElementById('selAccount').options[document.getElementById('selAccount').selectedIndex].text,
-timestamp:new Date().toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+account:LANG==='en'?(ACCT_EN[document.getElementById('selAccount').value]||document.getElementById('selAccount').value):document.getElementById('selAccount').options[document.getElementById('selAccount').selectedIndex].text,
+timestamp:new Date().toLocaleString(LANG==='en'?'en-US':'zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})
 };
 document.getElementById('phase1').style.display='none';
 document.getElementById('phase2').style.display='block';
@@ -454,7 +705,7 @@ runProcessing();
 }
 
 function runProcessing(){
-var msgs=['正在采集多平台数据...','分析趋势热度...','生成爆款选题...','优化脚本方案...','生成完整报告...'];
+var msgs=T.procMsgs;
 var pct=0;var step=0;
 var barEl=document.getElementById('procBar');var pctEl=document.getElementById('procPct');var msgEl=document.getElementById('procMsg');
 function tick(){
@@ -478,11 +729,11 @@ renderTrends();renderScripts();renderInsights();
 
 function renderTrends(){
 var d=currentData.topics;
-var html='<table class="trend-table"><thead><tr><th>#</th><th>话题</th><th>置信度</th><th>趋势</th><th>爆发</th><th>平台</th><th>竞争</th><th>等级</th></tr></thead><tbody>';
+var html='<table class="trend-table"><thead><tr><th>'+T.thNum+'</th><th>'+T.thTopic+'</th><th>'+T.thConf+'</th><th>'+T.thTrend+'</th><th>'+T.thBurst+'</th><th>'+T.thPlat+'</th><th>'+T.thComp+'</th><th>'+T.thRank+'</th></tr></thead><tbody>';
 for(var i=0;i<d.length;i++){
 var t=d[i];var confClass=t.conf>=85?'conf-high':t.conf>=70?'conf-mid':'conf-low';
 var rankClass=t.rank==='S'?'rank-s':t.rank==='A'?'rank-a':'rank-b';
-html+='<tr><td style="font-family:var(--mono);color:var(--text3)">'+(i+1)+'</td><td><strong>'+t.name+'</strong><div style="font-size:11px;color:var(--text3);margin-top:2px">'+t.tags+'</div></td><td class="'+confClass+'" style="font-family:var(--mono)">'+t.conf+'%</td><td>'+makeSpark(t.conf)+'</td><td style="font-family:var(--mono);color:var(--text3)">'+t.days+'天后</td><td><span class="comp-tag">'+t.plat+'</span></td><td>'+t.comp+'</td><td><span class="'+rankClass+'">'+t.rank+'</span></td></tr>';
+html+='<tr><td style="font-family:var(--mono);color:var(--text3)">'+(i+1)+'</td><td><strong>'+t.name+'</strong><div style="font-size:11px;color:var(--text3);margin-top:2px">'+t.tags+'</div></td><td class="'+confClass+'" style="font-family:var(--mono)">'+t.conf+'%</td><td>'+makeSpark(t.conf)+'</td><td style="font-family:var(--mono);color:var(--text3)">'+t.days+T.daysAfter+'</td><td><span class="comp-tag">'+t.plat+'</span></td><td>'+t.comp+'</td><td><span class="'+rankClass+'">'+t.rank+'</span></td></tr>';
 }
 html+='</tbody></table>';
 document.getElementById('tab-trends').innerHTML=html;
@@ -495,12 +746,12 @@ var s=d[i];
 html+='<div class="script-card"><div class="script-head" data-idx="'+i+'"><div class="script-head-left"><span class="script-num">'+(i+1)+'</span><span class="script-title">'+s.title+'</span></div><div style="display:flex;align-items:center;gap:8px"><span class="script-dur">'+s.dur+'</span><span class="script-toggle" id="stog'+i+'"><svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></div></div>';
 html+='<div class="script-body" id="sbody'+i+'">';
 // Caption
-html+='<div style="background:var(--bg);border-radius:6px;padding:10px 12px;margin-bottom:10px"><div class="meta-key" style="margin-bottom:4px">推荐文案 (可直接复制)</div><div style="font-size:13px;line-height:1.7">'+s.caption+'</div><div style="font-size:11px;color:var(--cyan);margin-top:6px">'+s.hashtags+'</div></div>';
+html+='<div style="background:var(--bg);border-radius:6px;padding:10px 12px;margin-bottom:10px"><div class="meta-key" style="margin-bottom:4px">'+T.captionLabel+'</div><div style="font-size:13px;line-height:1.7">'+s.caption+'</div><div style="font-size:11px;color:var(--cyan);margin-top:6px">'+s.hashtags+'</div></div>';
 for(var j=0;j<s.scenes.length;j++){
 var sc=s.scenes[j];
 html+='<div class="scene-item"><div class="scene-time">'+sc.time+'</div><div class="scene-label">'+sc.label+'</div><div class="scene-desc">'+sc.desc+'</div></div>';
 }
-html+='<div class="script-meta"><div class="meta-item"><div class="meta-key">BGM建议</div>'+s.bgm+'</div><div class="meta-item"><div class="meta-key">发布时间</div>'+s.postTime+'</div></div>';
+html+='<div class="script-meta"><div class="meta-item"><div class="meta-key">'+T.bgmLabel+'</div>'+s.bgm+'</div><div class="meta-item"><div class="meta-key">'+T.postLabel+'</div>'+s.postTime+'</div></div>';
 html+='</div></div>';
 }
 var panel=document.getElementById('tab-scripts');panel.innerHTML=html;
@@ -517,24 +768,24 @@ function renderInsights(){
 var d=currentData.topics;
 var highConf=0;for(var i=0;i<d.length;i++){if(d[i].conf>=80)highConf++;}
 var html='<div class="stat-grid">';
-html+='<div class="stat-card"><div class="stat-val">'+d.length+'</div><div class="stat-label">预测覆盖话题数</div></div>';
-html+='<div class="stat-card"><div class="stat-val">'+Math.round(highConf/d.length*100)+'%</div><div class="stat-label">高置信度话题占比</div></div>';
-html+='<div class="stat-card"><div class="stat-val">3-5天</div><div class="stat-label">推荐发布窗口</div></div>';
-html+='<div class="stat-card"><div class="stat-val">'+Math.round((highConf/d.length)*87)+'%</div><div class="stat-label">预计爆款率</div></div>';
+html+='<div class="stat-card"><div class="stat-val">'+d.length+'</div><div class="stat-label">'+T.statTopics+'</div></div>';
+html+='<div class="stat-card"><div class="stat-val">'+Math.round(highConf/d.length*100)+'%</div><div class="stat-label">'+T.statHigh+'</div></div>';
+html+='<div class="stat-card"><div class="stat-val">'+T.windowVal+'</div><div class="stat-label">'+T.statWindow+'</div></div>';
+html+='<div class="stat-card"><div class="stat-val">'+Math.round((highConf/d.length)*87)+'%</div><div class="stat-label">'+T.statRate+'</div></div>';
 html+='</div>';
 var plats=currentData.platforms;
-html+='<div class="chart-section"><div class="chart-title">平台趋势强度对比</div>';
+html+='<div class="chart-section"><div class="chart-title">'+T.chartPlat+'</div>';
 var platVals=[];for(var p=0;p<plats.length;p++){platVals.push(Math.floor(Math.random()*30)+65);}
 for(var p2=0;p2<plats.length;p2++){
 var val=platVals[p2];var color=val>=85?'var(--green)':val>=70?'var(--cyan)':'var(--yellow)';
 html+='<div class="bar-row"><span class="bar-label">'+plats[p2]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+val+'%;background:'+color+'"></div></div><span class="bar-val">'+val+'</span></div>';
 }
 html+='</div>';
-html+='<div class="chart-section"><div class="chart-title">最佳发布时间热力图</div><div class="heatmap">';
+html+='<div class="chart-section"><div class="chart-title">'+T.chartHeat+'</div><div class="heatmap">';
 html+='<div class="hm-label"></div>';
-for(var c=0;c<HM_COLS.length;c++){html+='<div class="hm-day">'+HM_COLS[c]+'</div>';}
+for(var c=0;c<T.hmCols.length;c++){html+='<div class="hm-day">'+T.hmCols[c]+'</div>';}
 for(var r=0;r<HEATMAP.length;r++){
-html+='<div class="hm-label">'+HM_ROWS[r]+'</div>';
+html+='<div class="hm-label">'+T.hmRows[r]+'</div>';
 for(var cc=0;cc<HEATMAP[r].length;cc++){html+='<div class="hm-cell hm-'+HEATMAP[r][cc]+'"></div>';}
 }
 html+='</div></div>';
@@ -545,16 +796,16 @@ function exportReport(){
 var d=currentData;var L=[];var sep='════════════════════════════════════════════════';var sep2='────────────────────────────────────────────────';
 L.push('');
 L.push('  ╔══════════════════════════════════════════╗');
-L.push('  ║     TrendPulse AI  爆款内容预测报告      ║');
+L.push('  ║     '+T.rptTitle+'      ║');
 L.push('  ╚══════════════════════════════════════════╝');
 L.push('');
-L.push('  生成时间: '+d.timestamp);
-L.push('  分析领域: '+d.vertical);
-L.push('  账号类型: '+d.account);
-L.push('  目标平台: '+d.platforms.join(' / '));
+L.push('  '+T.rptGenTime+': '+d.timestamp);
+L.push('  '+T.rptField+': '+d.vertical);
+L.push('  '+T.rptAcct+': '+d.account);
+L.push('  '+T.rptPlat+': '+d.platforms.join(' / '));
 L.push('');
 L.push(sep);
-L.push('  PART 1  趋势预测 TOP 10');
+L.push('  PART 1  '+T.rptPart1);
 L.push(sep);
 L.push('');
 
@@ -564,32 +815,32 @@ var t=sRank[i];
 var star=t.rank==='S'?'★★★':t.rank==='A'?'★★☆':'★☆☆';
 var bar='';var barLen=Math.round(t.conf/5);for(var b=0;b<barLen;b++)bar+='█';for(var b2=barLen;b2<20;b2++)bar+='░';
 L.push('  ['+(i+1)+']  '+t.name);
-L.push('      置信度: '+bar+' '+t.conf+'%');
-L.push('      推荐等级: '+star+' ('+t.rank+'级)  |  爆发时间: '+t.days+'天后  |  竞争度: '+t.comp);
-L.push('      关联平台: '+t.plat);
-L.push('      推荐标签: '+t.tags);
+L.push('      '+T.rptConf+': '+bar+' '+t.conf+'%');
+L.push('      '+T.rptRank+': '+star+' ('+t.rank+')  |  '+T.rptBurst+': '+t.days+T.daysAfter+'  |  '+T.rptComp+': '+t.comp);
+L.push('      '+T.rptPlatLabel+': '+t.plat);
+L.push('      '+T.rptTags+': '+t.tags);
 L.push('');
 }
 
 L.push(sep);
-L.push('  PART 2  爆款脚本方案 (可直接使用)');
+L.push('  PART 2  '+T.rptPart2);
 L.push(sep);
 
 for(var s=0;s<d.scripts.length;s++){
 var sc=d.scripts[s];
 L.push('');
-L.push('  ┌─ 脚本 '+(s+1)+': '+sc.title+' ─┐');
-L.push('  │ 时长: '+sc.dur+'  |  发布时间: '+sc.postTime);
+L.push('  ┌─ '+T.rptScript+' '+(s+1)+': '+sc.title+' ─┐');
+L.push('  │ '+T.postLabel+': '+sc.postTime+'  |  '+sc.dur);
 L.push('  │ BGM: '+sc.bgm);
 L.push('  └──────────────────────────────┘');
 L.push('');
-L.push('  【推荐文案】直接复制发布:');
+L.push('  【'+T.rptCaption+'】');
 L.push('  '+sc.caption);
 L.push('');
-L.push('  【推荐标签】');
+L.push('  【'+T.rptHashtags+'】');
 L.push('  '+sc.hashtags);
 L.push('');
-L.push('  【分镜脚本】');
+L.push('  【'+T.rptScene+'】');
 for(var j=0;j<sc.scenes.length;j++){
 var scene=sc.scenes[j];
 L.push('  ['+scene.time+'] '+scene.label);
@@ -601,43 +852,38 @@ L.push(sep2);
 
 L.push('');
 L.push(sep);
-L.push('  PART 3  数据洞察摘要');
+L.push('  PART 3  '+T.rptPart3);
 L.push(sep);
 L.push('');
 var highConf=0;for(var h=0;h<d.topics.length;h++){if(d.topics[h].conf>=80)highConf++;}
-L.push('  预测覆盖话题数 ········ '+d.topics.length);
-L.push('  高置信度占比 ·········· '+Math.round(highConf/d.topics.length*100)+'%');
-L.push('  推荐发布窗口 ·········· 3-5天内');
-L.push('  预计爆款率 ············ '+Math.round((highConf/d.topics.length)*87)+'%');
+L.push('  '+T.rptCover+' ········ '+d.topics.length);
+L.push('  '+T.rptHighPct+' ·········· '+Math.round(highConf/d.topics.length*100)+'%');
+L.push('  '+T.rptWin+' ·········· '+T.windowVal);
+L.push('  '+T.rptRatePct+' ············ '+Math.round((highConf/d.topics.length)*87)+'%');
 L.push('');
-L.push('  【平台推荐发布时间】');
-L.push('  抖音/快手: 7:00-9:00 / 12:00-13:00 / 18:00-22:00');
-L.push('  小红书: 7:30-9:00 / 12:00-13:30 / 17:30-21:00');
-L.push('  B站: 10:00-12:00 / 18:00-22:00');
-L.push('  YouTube/TikTok: 根据目标时区 18:00-21:00');
+L.push('  【'+T.rptPlatTime+'】');
+L.push('  Douyin/Kuaishou: 7:00-9:00 / 12:00-13:00 / 18:00-22:00');
+L.push('  Xiaohongshu: 7:30-9:00 / 12:00-13:30 / 17:30-21:00');
+L.push('  Bilibili: 10:00-12:00 / 18:00-22:00');
+L.push('  YouTube/TikTok: 18:00-21:00 (target timezone)');
 L.push('');
 L.push(sep);
-L.push('  PART 4  执行清单 (Action Items)');
+L.push('  PART 4  '+T.rptPart4);
 L.push(sep);
 L.push('');
-L.push('  □ 1. 选定S级话题,优先制作排名前3的选题');
-L.push('  □ 2. 按分镜脚本准备拍摄素材和BGM');
-L.push('  □ 3. 复制推荐文案,根据个人风格微调');
-L.push('  □ 4. 在推荐时间窗口发布内容');
-L.push('  □ 5. 发布后2小时内积极回复评论互动');
-L.push('  □ 6. 发布后24小时检查数据表现');
-L.push('  □ 7. 48小时后根据数据决定是否追投/二创');
+for(var ai=0;ai<T.rptActions.length;ai++){
+L.push('  □ '+(ai+1)+'. '+T.rptActions[ai]);
+}
 L.push('');
 L.push(sep2);
 L.push('  Powered by TrendPulse AI | MuleRun Agent Store');
-L.push('  每次运行生成独立报告,数据基于多平台实时分析');
 L.push(sep2);
 L.push('');
 
 var blob=new Blob([L.join('\n')],{type:'text/plain;charset=utf-8'});
 var url=URL.createObjectURL(blob);
 var a=document.createElement('a');
-a.href=url;a.download='TrendPulse_爆款报告_'+d.vertical+'_'+d.timestamp.replace(/[\/\s:]/g,'')+'.txt';
+a.href=url;a.download='TrendPulse_'+(LANG==='en'?'Report':'爆款报告')+'_'+d.vertical+'_'+d.timestamp.replace(/[\/\s:,]/g,'')+'.txt';
 document.body.appendChild(a);a.click();document.body.removeChild(a);
 URL.revokeObjectURL(url);
 }
@@ -646,7 +892,7 @@ function finishSession(){
 document.getElementById('phase3').style.display='none';
 var el=document.getElementById('phase4');
 el.style.display='block';
-el.innerHTML='<div class="session-end"><div class="session-end-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h3>分析完成</h3><p>本次预测报告已生成完毕。如需新的分析请重新运行。</p></div>';
+el.innerHTML='<div class="session-end"><div class="session-end-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h3>'+T.doneTitle+'</h3><p>'+T.doneDesc+'</p></div>';
 document.getElementById('p3').className='phase-dot done';
 try{if(window.parent&&window.parent!==window){window.parent.postMessage({type:'session-end',status:'completed'},'*');}}catch(e){}
 }
@@ -664,6 +910,20 @@ if(panel)panel.classList.add('active');
 }
 
 initPlatforms();initTabs();updateStartBtn();
+if(LANG==='en'){
+var sel=document.getElementById('selVertical');sel.innerHTML='';
+var vkeys=['food','beauty','tech','life','comedy','knowledge','travel','fitness','fashion','pets'];
+for(var vi=0;vi<vkeys.length;vi++){var o=document.createElement('option');o.value=vkeys[vi];o.textContent=VERT_NAMES_EN[vkeys[vi]];sel.appendChild(o);}
+var selA=document.getElementById('selAccount');selA.innerHTML='';
+var akeys=['creator','brand','mcn','ecom'];var aLabels=['Individual Creator','Brand Account','MCN Agency','E-commerce'];
+for(var ai=0;ai<akeys.length;ai++){var o2=document.createElement('option');o2.value=akeys[ai];o2.textContent=aLabels[ai];selA.appendChild(o2);}
+document.getElementById('btnStart').textContent=T.startBtn;
+document.getElementById('tabBtn1').textContent=T.tab1;
+document.getElementById('tabBtn2').textContent=T.tab2;
+document.getElementById('tabBtn3').textContent=T.tab3;
+document.getElementById('btnExport').textContent=T.exportBtn;
+document.getElementById('btnFinish').textContent=T.finishBtn;
+}
 window._app={start:startAnalysis,finish:finishSession,exportReport:exportReport};
 window.addEventListener('beforeunload',function(){clearAllTimeouts();});
 })();
